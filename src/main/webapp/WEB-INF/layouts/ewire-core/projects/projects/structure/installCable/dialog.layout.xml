@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments initialization="form -> model -> $form.set(`ewire.wires:Cable#connections`, $model)">
+		<title>
+			<title key="dynamic.f5c3acc1-1fdd-473a-bbf8-a61ca7aa2db4">
+				<en>Install cable</en>
+				<de>Kabel ziehen</de>
+			</title>
+		</title>
+		<open-handler id="ID_4ac803db_48bc_44c6_a07e_52a2eb012b52"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="css:fa-solid fa-arrows-left-right"
+			target="selection(self())"
+			targetComponent="ewire-core/projects/projects/structure/installCable/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.f5c3acc1-1fdd-473a-bbf8-a61ca7aa2db4">
+				<en>Install cable</en>
+				<de>Kabel ziehen</de>
+			</resourceKey>
+			<executability>
+				<rule-by-expression show-disabled="true">
+					<decision><![CDATA[sockets -> (
+    $sockets.size() >= 2 && 
+    $sockets.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.core:Socket`))
+)
+/** TODO: broken:
+|| #(
+    "Two sockets must be selected."@en, 
+    "Es müssen zwei Dosen ausgewählt sein."@de
+)
+*/]]></decision>
+				</rule-by-expression>
+			</executability>
+		</open-handler>
+		<typeOptions
+			include-subtypes="false"
+			type="ewire.wires:Cable"
+		/>
+		<create-handler id="ID_11feab63_8d66_49a6_b69b_acafe49cea76"/>
+	</arguments>
+</config:template-call>

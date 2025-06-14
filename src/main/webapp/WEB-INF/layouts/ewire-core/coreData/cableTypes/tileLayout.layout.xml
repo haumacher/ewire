@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_55597287_0077_4302_9141_d2cb34cda337"
+		tileName="ID_993be443_8d56_4263_9fdf_ef20a1e2cc2f"
+	>
+		<tileLabel key="dynamic.1878d2d5-fa70-457d-8a4e-0f1ba1fa0ff4">
+			<en>Cable types</en>
+			<de>Kabeltypen</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-solid fa-arrows-left-right-to-line"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/coreData/cableTypes/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

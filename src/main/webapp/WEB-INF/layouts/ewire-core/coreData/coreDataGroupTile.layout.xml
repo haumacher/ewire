@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileGroup.template.xml"
+>
+	<arguments>
+		<name key="dynamic.ede4d16f-ee8e-4f7a-83ab-7b98f4a6f164">
+			<en>Core data</en>
+			<de>Basisdaten</de>
+		</name>
+		<components>
+			<layout-reference resource="ewire-core/coreData/cableTypes/tileLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

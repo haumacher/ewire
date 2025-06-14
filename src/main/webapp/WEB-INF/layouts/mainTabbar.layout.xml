@@ -8,6 +8,7 @@
 	<arguments>
 		<components>
 			<layout-reference resource="ewire-core/projects/tabLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/coreData/tabLayout.layout.xml"/>
 			<layout-reference resource="com.top_logic.model.search/search/modelSearch.layout.xml"/>
 			<layout-reference resource="admin/index.layout.xml"/>
 		</components>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments
+		helpID="ID_14f60c7a_fc83_47ff_a5f7_5a80b2d2bde4"
+		tabIcon="css:bi bi-database-fill"
+	>
+		<tabLabel key="dynamic.f126fc41-ecf8-4796-bda7-84d4248fd6c4">
+			<en>Core data</en>
+			<de>Basisdaten</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="ewire-core/coreData/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

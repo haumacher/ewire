@@ -7,6 +7,7 @@
 	<arguments
 		defaultColumns="name,shortcut"
 		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		multiSelection="true"
 		type="ewire.core:Location,ewire.core:WithLocations"
 	>
 		<name key="dynamic.fb1842ba-002c-4c78-b74d-771c840be0f5">
@@ -15,7 +16,7 @@
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
 			children="node->$node.get(`ewire.core:WithLocations#locations`)"
-			nodePredicate="node->$node.instanceOf(`ewire.core:WithLocations`)"
+			nodePredicate="node->$node.instanceOf(`ewire.core:Location`) || $node.instanceOf(`ewire.core:Project`)"
 			parents="node->$node.referers(`ewire.core:WithLocations#locations`)"
 			rootNode="project -> $project"
 		/>
@@ -47,5 +48,8 @@
 				target="selection(self())"
 			/>
 		</buttons>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/structure/installCable/dialog.layout.xml"/>
+		</dialogs>
 	</arguments>
 </config:template-call>

@@ -50,9 +50,15 @@
 								<render-whole-line/>
 							</annotations>
 						</field>
+						<field
+							attribute="description"
+							fullQualifiedName="ewire.core:Location#description"
+							type="tl.model.wysiwyg:Html"
+						/>
 					</form>
 				</form-definition>
 				<instance-presentation icon="css:fa-solid fa-location-dot"/>
+				<id-column value="label"/>
 			</annotations>
 			<attributes>
 				<property name="name"
@@ -73,6 +79,32 @@
 				<property name="icon"
 					type="tl.core:Icon"
 				/>
+				<property name="description"
+					type="tl.model.wysiwyg:Html"
+				/>
+				<property name="label"
+					type="tl.core:String"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[l -> $l.get(`ewire.core:Location#name`) + {
+    parentShortcuts = $l.recursion(x -> $x.container().instanceOf(`ewire.core:Location`)
+        ? $x.container()
+        : null,
+        minDepth: 1
+    )
+    .map(l -> $l.get(`ewire.core:Location#shortcut`))
+    .filter(x -> $x != null);
+    
+    $parentShortcuts.isEmpty() ? "" : " < " + $parentShortcuts.join(" < ")
+}
+
+]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
 			</attributes>
 		</interface>
 		<class name="Building">
@@ -188,6 +220,13 @@
 				<property name="name"
 					mandatory="true"
 					type="tl.core:String"
+				/>
+				<reference name="cables"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.wires:Cable"
 				/>
 			</attributes>
 		</class>

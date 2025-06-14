@@ -4,10 +4,73 @@
 	xmlns:config="http://www.top-logic.com/ns/config/6.0"
 	template="com.top_logic.element/form.template.xml"
 >
-	<arguments model="selection(ewire-core/projects/projects/structure/projectStructureGrid.layout.xml#Grid)">
+	<arguments>
 		<name key="dynamic.d51d74e4-7267-46fe-a517-ffaa822e2fbb">
 			<en>Details</en>
 			<de>Details</de>
 		</name>
+		<model class="com.top_logic.model.search.providers.TransformLinkingByExpression"
+			function="x -> $x.size() == 1 ? $x.singleElement() : null"
+			input="selection(ewire-core/projects/projects/structure/projectStructureGrid.layout.xml#Grid)"
+		/>
+		<forms>
+			<form type="ewire.core:Socket">
+				<formDefinition>
+					<field
+						attribute="name"
+						fullQualifiedName="ewire.core:Location#name"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="shortcut"
+						fullQualifiedName="ewire.core:Location#shortcut"
+						type="tl.core:String"
+					/>
+					<field
+						attribute="icon"
+						fullQualifiedName="ewire.core:Location#icon"
+						type="tl.core:Icon"
+					/>
+					<field
+						attribute="pictures"
+						fullQualifiedName="ewire.core:Location#pictures"
+						type="tl.imagegallery:GalleryImage"
+					>
+						<annotations>
+							<render-whole-line/>
+						</annotations>
+					</field>
+					<field
+						attribute="description"
+						fullQualifiedName="ewire.core:Location#description"
+						type="tl.model.wysiwyg:Html"
+					/>
+					<formTable
+						form-field-name="800b9878-6d38-46d6-9b89-cf968d8b843d"
+						rows="socket -> $socket.referers(`ewire.wires:Cable#connections`)"
+						type="ewire.wires:Cable"
+					>
+						<label key="dynamic.393e318c-2bd9-4c5e-8ed6-4431b4dc623f">
+							<en>Cables</en>
+							<de>Kabel</de>
+						</label>
+						<columns>
+							<column name="id"
+								visibility="read-only"
+							/>
+							<column name="cableType"
+								visibility="read-only"
+							/>
+							<column name="connections"
+								visibility="read-only"
+							/>
+							<column name="functionsDisplay"
+								visibility="read-only"
+							/>
+						</columns>
+					</formTable>
+				</formDefinition>
+			</form>
+		</forms>
 	</arguments>
 </config:template-call>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="name"
+		size="300px"
+		type="ewire.wires:CableType"
+	>
+		<dialogs>
+			<layout-reference resource="ewire-core/coreData/cableTypes/createObject/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.6cd2ca7c-d295-4117-a940-81a5b397e55d">
+			<en>Cable types</en>
+			<de>Kabeltypen</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->all(`ewire.wires:CableType`)"
+			supportsElement="element->$element.instanceOf(`ewire.wires:CableType`)"
+		/>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="deleteSelection"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

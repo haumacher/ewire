@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="ewire.wires">
+		<class name="Cable">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="id"
+							fullQualifiedName="ewire.wires:Cable#id"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="cableType"
+							fullQualifiedName="ewire.wires:Cable#cableType"
+							type="ewire.wires:CableType"
+						/>
+						<field
+							attribute="connections"
+							fullQualifiedName="ewire.wires:Cable#connections"
+							type="ewire.core:Socket"
+						/>
+						<field
+							attribute="functions"
+							fullQualifiedName="ewire.wires:Cable#functions"
+							type="ewire.wires:Function"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
+			<attributes>
+				<reference name="cableType"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="CableType"
+				>
+					<annotations>
+						<reference-display value="drop-down"/>
+					</annotations>
+				</reference>
+				<property name="id"
+					mandatory="true"
+					type="tl.core:String"
+				>
+					<annotations>
+						<default-value>
+							<provider class="com.top_logic.element.structured.util.NumberHandlerDefaultProvider"
+								number-pattern="000"
+								sequence-name="cable"
+							/>
+						</default-value>
+						<create-visibility value="hidden"/>
+						<visibility value="read-only"/>
+					</annotations>
+				</property>
+				<reference name="connections"
+					kind="forwards"
+					mandatory="true"
+					multiple="true"
+					navigate="true"
+					type="ewire.core:Socket"
+				>
+					<annotations>
+						<constraints>
+							<constraint-by-expression check="connections -> $connections.size() >= 2"/>
+						</constraints>
+						<options-display/>
+					</annotations>
+				</reference>
+				<reference name="functions"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="Function"
+				/>
+				<reference name="functionsDisplay"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="Function"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="cable -> $cable.get(`ewire.wires:Cable#functions`)"/>
+						</storage-algorithm>
+						<visibility value="hidden"/>
+					</annotations>
+				</reference>
+			</attributes>
+		</class>
+		<class name="CableType">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.wires:CableType#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="wires"
+							fullQualifiedName="ewire.wires:CableType#wires"
+							type="ewire.wires:WireType"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
+			<attributes>
+				<reference name="wires"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="WireType"
+				/>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+		<class name="Function">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<id-column value="label"/>
+			</annotations>
+			<attributes>
+				<reference name="wire"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="WireType"
+				>
+					<annotations>
+						<options>
+							<options-by-expression>
+								<function><![CDATA[fun -> $fun.container()
+    .get(`ewire.wires:Cable#cableType`)
+    .get(`ewire.wires:CableType#wires`)]]></function>
+							</options-by-expression>
+						</options>
+						<reference-display value="drop-down"/>
+					</annotations>
+				</reference>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+				<property name="label"
+					type="tl.core:String"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[fun -> "{0}: {1}".fill(
+    $fun.get(`ewire.wires:Function#wire`).label(),
+    $fun.get(`ewire.wires:Function#name`)
+)]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
+			</attributes>
+		</class>
+		<class name="WireType">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<attributes>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>
