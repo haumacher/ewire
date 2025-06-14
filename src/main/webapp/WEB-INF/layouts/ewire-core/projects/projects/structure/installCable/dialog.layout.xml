@@ -24,13 +24,13 @@
 			<executability>
 				<rule-by-expression show-disabled="true">
 					<decision><![CDATA[sockets -> (
-    $sockets.size() >= 2 && 
+    $sockets.size() >= 1 && 
     $sockets.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.core:Socket`))
 )
 /** TODO: broken:
 || #(
-    "Two sockets must be selected."@en, 
-    "Es müssen zwei Dosen ausgewählt sein."@de
+    "At least one socket must be selected."@en, 
+    "Es muss mindestens eine Dose ausgewählt sein."@de
 )
 */]]></decision>
 				</rule-by-expression>
@@ -40,6 +40,12 @@
 			include-subtypes="false"
 			type="ewire.wires:Cable"
 		/>
-		<create-handler id="ID_11feab63_8d66_49a6_b69b_acafe49cea76"/>
+		<create-handler id="ID_11feab63_8d66_49a6_b69b_acafe49cea76">
+			<linkOperation><![CDATA[x -> cable -> $cable.get(`ewire.wires:Cable#connections`)
+    .firstElement()
+    .recursion(x -> $x.instanceOf(`ewire.core:Project`) ? null : $x.container())
+    .lastElement()
+    .add(`ewire.core:Project#cables`, $cable)]]></linkOperation>
+		</create-handler>
 	</arguments>
 </config:template-call>

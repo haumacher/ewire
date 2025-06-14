@@ -25,12 +25,18 @@
 							type="ewire.core:Socket"
 						/>
 						<field
+							attribute="description"
+							fullQualifiedName="ewire.wires:Cable#description"
+							type="tl.core:String"
+						/>
+						<field
 							attribute="functions"
 							fullQualifiedName="ewire.wires:Cable#functions"
 							type="ewire.wires:Function"
 						/>
 					</form>
 				</form-definition>
+				<id-column value="id"/>
 			</annotations>
 			<attributes>
 				<reference name="cableType"
@@ -67,7 +73,13 @@
 				>
 					<annotations>
 						<constraints>
-							<constraint-by-expression check="connections -> $connections.size() >= 2"/>
+							<constraint-by-expression>
+								<check><![CDATA[connections -> $connections.size() >= 2 ||
+#(
+    "At least two sockets must be selected."@en,
+    "Es müssen mindestens zwei Dosen ausgewählt sein."@de
+)]]></check>
+							</constraint-by-expression>
 						</constraints>
 						<options-display/>
 					</annotations>
@@ -92,6 +104,9 @@
 						<visibility value="hidden"/>
 					</annotations>
 				</reference>
+				<property name="description"
+					type="tl.core:String"
+				/>
 			</attributes>
 		</class>
 		<class name="CableType">
@@ -170,6 +185,7 @@
 )]]></expr>
 							</query>
 						</storage-algorithm>
+						<visibility value="hidden"/>
 					</annotations>
 				</property>
 			</attributes>

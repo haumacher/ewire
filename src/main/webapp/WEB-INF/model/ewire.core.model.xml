@@ -213,6 +213,15 @@
 							fullQualifiedName="ewire.core:Project#name"
 							type="tl.core:String"
 						/>
+						<field
+							attribute="images"
+							fullQualifiedName="ewire.core:Project#images"
+							type="tl.imagegallery:GalleryImage"
+						>
+							<annotations>
+								<render-whole-line/>
+							</annotations>
+						</field>
 					</form>
 				</form-definition>
 			</annotations>
@@ -227,6 +236,14 @@
 					multiple="true"
 					navigate="true"
 					type="ewire.wires:Cable"
+				/>
+				<reference name="images"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="tl.imagegallery:GalleryImage"
 				/>
 			</attributes>
 		</class>

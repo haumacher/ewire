@@ -64,6 +64,7 @@
 							<column name="connections"
 								visibility="read-only"
 							/>
+							<column name="description"/>
 							<column name="functionsDisplay"
 								visibility="read-only"
 							/>
