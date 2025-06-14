@@ -169,10 +169,6 @@
 						<reference-display value="drop-down"/>
 					</annotations>
 				</reference>
-				<property name="name"
-					mandatory="true"
-					type="tl.core:String"
-				/>
 				<property name="label"
 					type="tl.core:String"
 				>
@@ -181,13 +177,19 @@
 							<query>
 								<expr><![CDATA[fun -> "{0}: {1}".fill(
     $fun.get(`ewire.wires:Function#wire`).label(),
-    $fun.get(`ewire.wires:Function#name`)
+    $fun.get(`ewire.wires:Function#function`).label()
 )]]></expr>
 							</query>
 						</storage-algorithm>
 						<visibility value="hidden"/>
 					</annotations>
 				</property>
+				<reference name="function"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="ewire.functions:Function"
+				/>
 			</attributes>
 		</class>
 		<class name="WireType">

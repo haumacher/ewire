@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="ewire.functions">
+		<class name="Function">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<id-column value="label"/>
+			</annotations>
+			<attributes>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+				<reference name="location"
+					kind="forwards"
+					navigate="true"
+					type="ewire.core:Location"
+				/>
+				<property name="label"
+					type="tl.core:String"
+				>
+					<annotations>
+						<visibility value="hidden"/>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[fun -> "{0} ({1})".fill(
+    $fun.get(`ewire.functions:Function#name`),
+    $fun.get(`ewire.functions:Function#location`).label()
+)]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
+			</attributes>
+		</class>
+	</module>
+</model>

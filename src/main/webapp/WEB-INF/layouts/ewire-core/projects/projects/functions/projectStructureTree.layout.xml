@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tree.template.xml"
+>
+	<arguments model="selection(ewire-core/projects/projectsContextList.layout.xml#List)">
+		<name key="dynamic.c900f642-6c57-4ce3-8830-682e596aa3d6">
+			<en>Project structure</en>
+			<de>Projektstruktur</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			nodePredicate="node->$node.instanceOf(`ewire.core:WithLocations`)"
+			parents="node->$node.referers(`ewire.core:WithLocations#locations`)"
+			rootNode="project -> $project"
+		>
+			<children><![CDATA[node->$node.instanceOf(`ewire.core:Room`)
+    ? null 
+    : $node.get(`ewire.core:WithLocations#locations`)]]></children>
+		</modelBuilder>
+	</arguments>
+</config:template-call>

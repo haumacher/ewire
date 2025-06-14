@@ -245,6 +245,13 @@
 					ordered="true"
 					type="tl.imagegallery:GalleryImage"
 				/>
+				<reference name="functions"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.functions:Function"
+				/>
 			</attributes>
 		</class>
 	</module>

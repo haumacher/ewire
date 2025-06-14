@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/grid.template.xml"
+>
+	<arguments
+		defaultColumns="name"
+		model="selection(ewire-core/projects/projects/functions/projectStructureTree.layout.xml#Tree)"
+		type="ewire.functions:Function"
+	>
+		<name key="dynamic.cbd9d5be-f627-4ff4-84e5-25e1de5e7835">
+			<en>Functions</en>
+			<de>Funktionen</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
+		>
+			<elements><![CDATA[model->$model.instanceOf(`ewire.core:Project`) 
+    ? $model.get(`ewire.core:Project#functions`)
+        .filter(f -> $f.get(`ewire.functions:Function#location`) == null)
+    : $model.referers(`ewire.functions:Function#location`)]]></elements>
+		</modelBuilder>
+		<buttons>
+			<button id="exportExcelGrid"
+				class="com.top_logic.layout.table.export.StreamingExcelExportHandler"
+			/>
+			<button id="createRow"
+				class="com.top_logic.model.search.providers.GridCreateHandlerByExpression"
+			>
+				<checkScopeProvider/>
+				<initOperation><![CDATA[c -> function -> $c.instanceOf(`ewire.core:Project`) 
+    ? $c.add(`ewire.core:Project#functions`, $function)
+    : {
+        $function.set(`ewire.functions:Function#location`, $c);
+        $c.recursion(l -> $l.instanceOf(`ewire.core:Project`) 
+            ? null 
+            : $l.container()
+        )
+        .lastElement()
+        .add(`ewire.core:Project#functions`, $function)
+    }]]></initOperation>
+				<type-options
+					include-subtypes="false"
+					type="ewire.functions:Function"
+				/>
+			</button>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>
