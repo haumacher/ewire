@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/treegrid.template.xml"
+>
+	<arguments
+		defaultColumns="name,shortcut"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		type="ewire.core:Location,ewire.core:WithLocations"
+	>
+		<name key="dynamic.fb1842ba-002c-4c78-b74d-771c840be0f5">
+			<en>Project structure</en>
+			<de>Projektstruktur</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			children="node->$node.get(`ewire.core:WithLocations#locations`)"
+			nodePredicate="node->$node.instanceOf(`ewire.core:WithLocations`)"
+			parents="node->$node.referers(`ewire.core:WithLocations#locations`)"
+			rootNode="project -> $project"
+		/>
+		<buttons>
+			<button id="exportExcelGrid"
+				class="com.top_logic.layout.table.export.StreamingExcelExportHandler"
+			/>
+			<button id="createNewRow"
+				class="com.top_logic.model.search.providers.GridCreateHandlerByExpression"
+				createContext="model -> $model"
+				initOperation="createContext -> newObject -> target -> $createContext.add(`ewire.core:WithLocations#locations`, $newObject)"
+				target="selection(self())"
+			>
+				<checkScopeProvider/>
+				<type-options class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression"
+					include-subtypes="true"
+				>
+					<possible-types><![CDATA[x -> $x.recursion(
+        // Find first non-generic location.
+        l -> $l.type() == `ewire.core:OtherLocation` ? $l.container() : null)
+    .lastElement()
+    .type()
+    .attribute("locations")
+    .get(`tl.model:TLStructuredTypePart#type`)]]></possible-types>
+				</type-options>
+			</button>
+			<button id="ID_bcc2e2ba_dda7_4b49_b104_8bacdfc43eaa"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

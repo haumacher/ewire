@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments model="selection(ewire-core/projects/projects/structure/projectStructureGrid.layout.xml#Grid)">
+		<name key="dynamic.d51d74e4-7267-46fe-a517-ffaa822e2fbb">
+			<en>Details</en>
+			<de>Details</de>
+		</name>
+	</arguments>
+</config:template-call>

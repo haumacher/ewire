@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.638225ec-6c24-4e65-89ad-f4aab5c740c5">
+				<en>New Project</en>
+				<de>Neues Projekt</de>
+			</title>
+		</title>
+		<open-handler id="ID_b0a46d13_a2f4_49a1_b105_379299826b62"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			targetComponent="ewire-core/projects/newProject/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.638225ec-6c24-4e65-89ad-f4aab5c740c5">
+				<en>New Project</en>
+				<de>Neues Projekt</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions
+			include-subtypes="false"
+			type="ewire.core:Project"
+		/>
+		<create-handler id="ID_4eac4693_3c77_431b_b6d3_c3c5af5674ee"/>
+	</arguments>
+</config:template-call>

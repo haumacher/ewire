@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileList.template.xml"
+>
+	<arguments helpID="ID_37724b6a_d251_4561_ad0e_50de8dd17a87">
+		<name key="dynamic.47b3dee3-1a77-4c7d-87e1-4ae7ec23e14f">
+			<en>Projects</en>
+			<de>Projekte</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->all(`ewire.core:Project`)"
+			supportsElement="element->$element.instanceOf(`ewire.core:Project`)"
+		/>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/newProject/dialog.layout.xml"/>
+		</dialogs>
+		<component class="com.top_logic.mig.html.layout.LayoutReference$LayoutReferenceComponent"
+			resource="ewire-core/projects/projects/_0_GroupTile.layout.xml"
+		/>
+	</arguments>
+</config:template-call>

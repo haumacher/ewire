@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_e2848f0c_d48f_4e77_b788_8c7f16dec4db"
+		tileName="ID_6073d245_2643_4b9d_9b2d_c559125def3f"
+	>
+		<tileLabel key="dynamic.cad1c4e2-a1a2-4eff-9b4f-f134e9e38aa4">
+			<en>Structure</en>
+			<de>Struktur</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="colored:tl-icon structure"
+		>
+			<description key="dynamic.4404f012-afcb-4ddf-904a-aeba0efe3f5c">
+				<en>The structure of the objects</en>
+				<de>Die Struktur der Objekte</de>
+			</description>
+		</preview>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/structure/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

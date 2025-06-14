@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tab.template.xml"
+>
+	<arguments
+		helpID="ID_e0c8babb_3587_44fc_b7fa_161b0774197d"
+		tabIcon="colored:tl-icon project-sub"
+	>
+		<tabLabel key="dynamic.99b5bd28-c939-4584-96c3-bc56fd4c63e7">
+			<en>Projects</en>
+			<de>Projekte</de>
+		</tabLabel>
+		<components>
+			<layout-reference resource="ewire-core/projects/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

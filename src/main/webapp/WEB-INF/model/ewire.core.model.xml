@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="ewire.core">
+		<annotations>
+			<package-binding
+				implementation-package="de.haumacher.ewire.core.model.impl"
+				interface-package="de.haumacher.ewire.core.model"
+			/>
+		</annotations>
+		<interface name="Location">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<dynamic-icon>
+					<icon-by-expression>
+						<icon><![CDATA[x -> $x.get(`ewire.core:Location#icon`) ||
+    switch ($x.type()) {
+        `ewire.core:Building`: "css:fa-regular fa-building";
+        `ewire.core:Floor`: "css:fa-solid fa-grip-lines";
+        `ewire.core:Wall`: "css:bi bi-bricks";
+        `ewire.core:Socket`: "css:fa-solid fa-plug";
+    }]]></icon>
+					</icon-by-expression>
+				</dynamic-icon>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.core:Location#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="shortcut"
+							fullQualifiedName="ewire.core:Location#shortcut"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="icon"
+							fullQualifiedName="ewire.core:Location#icon"
+							type="tl.core:Icon"
+						/>
+						<field
+							attribute="pictures"
+							fullQualifiedName="ewire.core:Location#pictures"
+							type="tl.imagegallery:GalleryImage"
+						>
+							<annotations>
+								<render-whole-line/>
+							</annotations>
+						</field>
+					</form>
+				</form-definition>
+				<instance-presentation icon="css:fa-solid fa-location-dot"/>
+			</annotations>
+			<attributes>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+				<property name="shortcut"
+					type="tl.core:String"
+				/>
+				<reference name="pictures"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="tl.imagegallery:GalleryImage"
+				/>
+				<property name="icon"
+					type="tl.core:Icon"
+				/>
+			</attributes>
+		</interface>
+		<class name="Building">
+			<generalizations>
+				<generalization type="Location"/>
+				<generalization type="WithLocations"/>
+			</generalizations>
+			<attributes>
+				<reference name="locations"
+					override="true"
+					type="InBuilding"
+				/>
+			</attributes>
+		</class>
+		<interface name="InBuilding">
+			<generalizations>
+				<generalization type="Location"/>
+			</generalizations>
+		</interface>
+		<class name="Floor">
+			<generalizations>
+				<generalization type="InBuilding"/>
+				<generalization type="WithLocations"/>
+			</generalizations>
+			<attributes>
+				<reference name="locations"
+					override="true"
+					type="OnFloor"
+				/>
+			</attributes>
+		</class>
+		<interface name="OnFloor">
+			<generalizations>
+				<generalization type="InBuilding"/>
+			</generalizations>
+		</interface>
+		<interface name="InRoom">
+			<generalizations>
+				<generalization type="OnFloor"/>
+			</generalizations>
+		</interface>
+		<interface name="OnWall">
+			<generalizations>
+				<generalization type="InRoom"/>
+			</generalizations>
+		</interface>
+		<class name="OtherLocation">
+			<generalizations>
+				<generalization type="OnWall"/>
+				<generalization type="WithLocations"/>
+			</generalizations>
+		</class>
+		<class name="Socket">
+			<generalizations>
+				<generalization type="OnWall"/>
+			</generalizations>
+		</class>
+		<class name="Wall">
+			<generalizations>
+				<generalization type="InRoom"/>
+				<generalization type="WithLocations"/>
+			</generalizations>
+			<attributes>
+				<reference name="locations"
+					override="true"
+					type="OnWall"
+				/>
+			</attributes>
+		</class>
+		<class name="Room">
+			<generalizations>
+				<generalization type="OnFloor"/>
+				<generalization type="WithLocations"/>
+			</generalizations>
+			<attributes>
+				<reference name="locations"
+					override="true"
+					type="InRoom"
+				/>
+			</attributes>
+		</class>
+		<interface name="WithLocations">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<attributes>
+				<reference name="locations"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="Location"
+				/>
+			</attributes>
+		</interface>
+		<class name="Project">
+			<generalizations>
+				<generalization type="WithLocations"/>
+			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.core:Project#name"
+							type="tl.core:String"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
+			<attributes>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>
