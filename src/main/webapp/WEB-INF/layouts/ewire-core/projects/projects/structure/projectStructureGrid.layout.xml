@@ -31,16 +31,17 @@
 				target="selection(self())"
 			>
 				<checkScopeProvider/>
-				<type-options class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression"
-					include-subtypes="true"
-				>
+				<type-options class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression">
 					<possible-types><![CDATA[x -> $x.recursion(
         // Find first non-generic location.
         l -> $l.type() == `ewire.core:OtherLocation` ? $l.container() : null)
     .lastElement()
     .type()
     .attribute("locations")
-    .get(`tl.model:TLStructuredTypePart#type`)]]></possible-types>
+    .get(`tl.model:TLStructuredTypePart#type`)
+    .recursion(t -> $t.referers(`tl.model:TLClass#generalizations`))
+    .filter(t -> !$t.get(`tl.model:TLClass#abstract`))
+    .sort(comparator(t -> $t.label()))]]></possible-types>
 				</type-options>
 			</button>
 			<button id="ID_bcc2e2ba_dda7_4b49_b104_8bacdfc43eaa"
