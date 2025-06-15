@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments initialization="cable -> context -> $cable.set(`ewire.wires:Cable#connections`, [$context])">
+		<title>
+			<title key="dynamic.ea41974b-9b61-4d77-a7a9-90d483f8a951">
+				<en>Intall cable</en>
+				<de>Kabel ziehen</de>
+			</title>
+		</title>
+		<open-handler id="ID_d62120ed_9f3a_4be2_9b94_8c75f525e7c1"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			target="selection(ewire-core/projects/projects/cables/locationStructureContextTree.layout.xml#Tree)"
+			targetComponent="ewire-core/projects/projects/cables/locationStructure/intallCable/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.ea41974b-9b61-4d77-a7a9-90d483f8a951">
+				<en>Intall cable</en>
+				<de>Kabel ziehen</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="ewire.wires:Cable"/>
+		<create-handler id="ID_dca27508_2d9f_48a3_be8f_87dd6ce9ddc9">
+			<linkOperation><![CDATA[x -> cable -> $cable.get(`ewire.wires:Cable#connections`)
+    .firstElement()
+    .get(`ewire.core:Location#project`)
+    .add(`ewire.core:Project#cables`, $cable)]]></linkOperation>
+		</create-handler>
+	</arguments>
+</config:template-call>

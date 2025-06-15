@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileTable.template.xml"
+>
+	<arguments
+		defaultColumns="cableType,id,connections,functions"
+		helpID="ID_ab639b56_4777_4b0a_9206_a71f454ff931"
+		model="selection(ewire-core/projects/projects/cables/locationStructureContextTree.layout.xml#Tree)"
+		type="ewire.wires:Cable"
+	>
+		<name key="dynamic.23e44d17-4868-4f5b-9b15-f75e01810a47">
+			<en>{0}</en>
+			<de>{0}</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.referers(`ewire.wires:Cable#connections`)"
+			supportsElement="element->$element.instanceOf(`ewire.wires:Cable`)"
+		/>
+		<configurationProviders>
+			<column-customizations>
+				<column name="connections">
+					<column-options select="false"/>
+				</column>
+			</column-customizations>
+		</configurationProviders>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/cables/locationStructure/intallCable/dialog.layout.xml"/>
+		</dialogs>
+		<component class="com.top_logic.mig.html.layout.LayoutReference$LayoutReferenceComponent"
+			resource="ewire-core/projects/projects/cables/locationStructure/_0_/_0_Form.layout.xml"
+		/>
+	</arguments>
+</config:template-call>

@@ -128,6 +128,22 @@
 						</storage-algorithm>
 					</annotations>
 				</reference>
+				<reference name="project"
+					kind="forwards"
+					navigate="true"
+					type="Project"
+				>
+					<annotations>
+						<visibility value="hidden"/>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[x -> $x
+    .recursion(x -> $x.instanceOf(`ewire.core:Project`) ? null : $x.container())
+    .lastElement()]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</reference>
 			</attributes>
 		</interface>
 		<class name="Building">

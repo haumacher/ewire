@@ -43,8 +43,7 @@
 		<create-handler id="ID_11feab63_8d66_49a6_b69b_acafe49cea76">
 			<linkOperation><![CDATA[x -> cable -> $cable.get(`ewire.wires:Cable#connections`)
     .firstElement()
-    .recursion(x -> $x.instanceOf(`ewire.core:Project`) ? null : $x.container())
-    .lastElement()
+    .get(`ewire.core:Location#project`)
     .add(`ewire.core:Project#cables`, $cable)]]></linkOperation>
 		</create-handler>
 	</arguments>
