@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments initialization="cable -> selection -> $cable.set(`ewire.wires:Cable#connections`, $selection)">
+		<title>
+			<title key="dynamic.a361ba69-89e9-4eb9-9b75-cd1dcfa2bdef">
+				<en>Install cable</en>
+				<de>Kabel ziehen</de>
+			</title>
+		</title>
+		<open-handler id="ID_2ce9ef3c_030f_4ddb_9249_b58db09d8220"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="css:fa-solid fa-link"
+			target="selection(self())"
+			targetComponent="ewire-core/projects/projects/cables1/installCable/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.a361ba69-89e9-4eb9-9b75-cd1dcfa2bdef">
+				<en>Install cable</en>
+				<de>Kabel ziehen</de>
+			</resourceKey>
+			<executability>
+				<rule-by-expression show-disabled="true">
+					<decision><![CDATA[selection -> $selection.size() == 2
+    && $selection.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.core:Socket`))]]></decision>
+				</rule-by-expression>
+			</executability>
+		</open-handler>
+		<typeOptions
+			include-subtypes="false"
+			type="ewire.wires:Cable"
+		/>
+		<create-handler id="ID_e061bf09_f974_4ad6_8f4f_699228ad8841">
+			<postCreateActions>
+				<showComponent>
+					<input/>
+					<global-target name="ewire-core/detailView/detailsForm.layout.xml#Form"/>
+				</showComponent>
+				<setModel target="model(ewire-core/detailView/detailsForm.layout.xml#Form)">
+					<input/>
+				</setModel>
+				<setModel target="selection(ewire-core/projects/projects/cables1/locationStructureTreeTable.layout.xml#TreeTable)">
+					<input class="com.top_logic.model.search.providers.ValueTransformationByExpression"
+						function="cable -> $cable.get(`ewire.wires:Cable#connections`)"
+					/>
+				</setModel>
+			</postCreateActions>
+			<linkOperation><![CDATA[x -> cable -> $cable.get(`ewire.wires:Cable#connections`)
+    .firstElement()
+    .get(`ewire.core:Location#project`)
+    .add(`ewire.core:Project#cables`, $cable)]]></linkOperation>
+		</create-handler>
+	</arguments>
+</config:template-call>

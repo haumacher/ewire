@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/dialog.template.xml"
+>
+	<arguments
+		defaultFor="ewire.core:Socket"
+		helpID="ID_320a5609_61a4_4b06_9917_6e73166848cb"
+	>
+		<title class="com.top_logic.layout.component.title.ModelTitle"
+			model="model(self())"
+		>
+			<key key="dynamic.ab29d418-a5ab-4da2-ac21-5b0518a526bb">
+				<en>Cables in {0}</en>
+				<de>Kabel in {0}</de>
+			</key>
+		</title>
+		<open-handler id="ID_0b6da96f_20a0_434f_a234_61c201944425"
+			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
+		>
+			<resourceKey key="dynamic.e0e58387-c4bb-49e0-b238-e650df2dcf7f">
+				<en>Socket inspector</en>
+				<de>Doseninspektor</de>
+			</resourceKey>
+		</open-handler>
+		<components>
+			<layout-reference resource="ewire-core/cablesIn_0_/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

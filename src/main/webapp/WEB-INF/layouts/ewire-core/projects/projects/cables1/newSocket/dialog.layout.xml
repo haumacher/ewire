@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.80e2de8d-48ca-4c3e-afeb-ffe9f4aaa169">
+				<en>New socket</en>
+				<de>Neue Dose</de>
+			</title>
+		</title>
+		<open-handler id="ID_a6dcdc8d_ca19_4b0a_8731_68ab5adb4948"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="css:fa-solid fa-plug-circle-plus"
+			target="selection(self())"
+			targetComponent="ewire-core/projects/projects/cables1/newSocket/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.80e2de8d-48ca-4c3e-afeb-ffe9f4aaa169">
+				<en>New socket</en>
+				<de>Neue Dose</de>
+			</resourceKey>
+			<executability>
+				<rule-by-expression>
+					<decision><![CDATA[selection -> $selection.size() == 1
+    && $selection.singleElement().instanceOf(`ewire.core:WithLocations`)
+    && `ewire.core:Socket`.isCompatible(
+        $selection.singleElement()
+            .type()
+            .attribute("locations")
+            .get(`tl.model:TLStructuredTypePart#type`))]]></decision>
+				</rule-by-expression>
+			</executability>
+		</open-handler>
+		<typeOptions type="ewire.core:Socket"/>
+		<create-handler id="ID_51c9d616_ee11_482a_80ea_6944f609a7f3">
+			<postCreateActions>
+				<setModel target="selection(ewire-core/projects/projects/cables1/locationStructureTreeTable.layout.xml#TreeTable)">
+					<input/>
+				</setModel>
+			</postCreateActions>
+			<linkOperation><![CDATA[x -> socket -> location -> $location
+    .singleElement()
+    .add(`ewire.core:WithLocations#locations`, $socket)]]></linkOperation>
+		</create-handler>
+	</arguments>
+</config:template-call>

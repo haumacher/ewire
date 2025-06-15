@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="cableType,id,connections,functions,description"
+		defaultSelection="false"
+		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
+		type="ewire.wires:Cable"
+	>
+		<name key="dynamic.38fb0aa2-9c45-41f0-8bac-b485a6d89ef9">
+			<en>Cables</en>
+			<de>Kabel</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.referers(`ewire.wires:Cable#connections`)"
+			supportsElement="element->$element.instanceOf(`ewire.wires:Cable`)"
+		/>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/treetable.template.xml"
+>
+	<arguments
+		defaultColumns="name"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		multiSelection="true"
+		type="ewire.core:WithLocations"
+	>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/cables1/installCable/dialog.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/cables1/newSocket/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.c69c0955-9235-43a1-8dc6-0d5933452c02">
+			<en>Location structure</en>
+			<de>Ortsstruktur</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			children="node->$node.get(`ewire.core:WithLocations#locations`)"
+			nodePredicate="node->$node.instanceOf(`ewire.core:WithLocations`) || $node.instanceOf(`ewire.core:Location`)"
+			parents="node->$node.referers(`ewire.core:WithLocations#locations`)"
+			rootNode="project -> $project"
+		/>
+		<buttons>
+			<button id="ID_81e59ea5_1aee_4503_ac6c_d267e8f7a11c"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				image="css:fa-solid fa-up-right-from-square"
+				operation="x -> $x.singleElement()"
+				target="selection(self())"
+				transaction="false"
+			>
+				<resourceKey key="dynamic.58d937cf-7b72-453a-b544-383ecb788c5c">
+					<en>Show details</en>
+					<de>Details anzeigen</de>
+				</resourceKey>
+				<executability>
+					<rule-by-expression decision="selection -> $selection.size() == 1"/>
+				</executability>
+				<postCreateActions>
+					<showComponent>
+						<input/>
+						<global-target name="ewire-core/detailView/detailsForm.layout.xml#Form"/>
+					</showComponent>
+					<setModel target="model(ewire-core/detailView/detailsForm.layout.xml#Form)">
+						<input/>
+					</setModel>
+				</postCreateActions>
+			</button>
+			<button id="ID_4a416d79_996e_4c91_921d_0428cfd4bb8e"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			>
+				<executability>
+					<rule-by-expression show-disabled="true">
+						<decision><![CDATA[selection -> {
+    cables = $selection
+        .map(l -> $l
+            .recursion(x -> $x.get(`ewire.core:WithLocations#locations`))
+            .filter(x -> $x.instanceOf(`ewire.core:Socket`))
+        )
+        .flatten()
+        .map(s -> $s.referers(`ewire.wires:Cable#connections`))
+        .flatten();
+        
+    $cables.isEmpty() ? true : #(
+        "The following cables must be removed first: {0}"@en,
+        "Die folgenden Kabel müssen vorher entfernt werden: {0}"@de
+    ).fill($cables)
+}]]></decision>
+					</rule-by-expression>
+				</executability>
+			</button>
+		</buttons>
+	</arguments>
+</config:template-call>

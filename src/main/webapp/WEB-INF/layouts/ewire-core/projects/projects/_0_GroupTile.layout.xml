@@ -11,6 +11,7 @@
 			<layout-reference resource="ewire-core/projects/projects/functions/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/functions1/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/cables/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/cables1/tileLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>
