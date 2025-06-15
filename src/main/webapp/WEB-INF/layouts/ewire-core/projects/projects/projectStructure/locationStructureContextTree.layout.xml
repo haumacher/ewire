@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileTree.template.xml"
+>
+	<arguments
+		helpID="ID_6dfce3ae_95fb_4d64_bea8_b2ce4fd31bfa"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+	>
+		<name key="dynamic.9b6135a5-b4c2-4453-bea3-64d6bd647167">
+			<en>Location structure</en>
+			<de>Ortsstuktur</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			nodePredicate="node->$node.instanceOf(`ewire.core:WithLocations`)"
+			parents="node->$node.referers(`ewire.core:WithLocations#locations`)"
+			rootNode="project -> $project"
+		>
+			<children><![CDATA[node->$node.get(`ewire.core:WithLocations#locations`)
+    .filter(l -> $l.instanceOf(`ewire.core:WithLocations`))]]></children>
+		</modelBuilder>
+		<component class="com.top_logic.mig.html.layout.LayoutReference$LayoutReferenceComponent"
+			resource="ewire-core/projects/projects/projectStructure/locationStructure/_0_ContextTable.layout.xml"
+		/>
+	</arguments>
+</config:template-call>

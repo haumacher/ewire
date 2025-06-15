@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.801bf322-ce6e-4325-b112-2c498ffff55d">
+				<en>New sub-element</en>
+				<de>Neues Unterelement</de>
+			</title>
+		</title>
+		<open-handler id="ID_d7ea03e2_ea46_46c0_a746_36bbc95069f3"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			target="selection(ewire-core/projects/projects/projectStructure/locationStructureContextTree.layout.xml#Tree)"
+			targetComponent="ewire-core/projects/projects/projectStructure/locationStructure/newSub_element/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.801bf322-ce6e-4325-b112-2c498ffff55d">
+				<en>New sub-element</en>
+				<de>Neues Unterelement</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression">
+			<possible-types><![CDATA[x -> $x.get(`ewire.core:Location#subElementTypes`)
+    .sort(comparator(t -> $t.label()))]]></possible-types>
+		</typeOptions>
+		<create-handler id="ID_ef727f44_4cf2_4cfc_b4d4_1ef9b8616689"
+			linkOperation="parent -> location -> $parent.add(`ewire.core:WithLocations#locations`, $location)"
+		/>
+	</arguments>
+</config:template-call>

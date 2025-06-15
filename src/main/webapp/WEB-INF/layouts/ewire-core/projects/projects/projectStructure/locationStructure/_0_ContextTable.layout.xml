@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileTable.template.xml"
+>
+	<arguments
+		defaultColumns="ID_abc26501_f2d3_41bb_b4f7_7b0110b05396,shortcut"
+		helpID="ID_0d14c919_9812_4b08_afee_996721b88fca"
+		model="selection(ewire-core/projects/projects/projectStructure/locationStructureContextTree.layout.xml#Tree)"
+		type="ewire.core:Location"
+	>
+		<name key="dynamic.d508eefd-ccd4-426a-aa42-d30478afaed8">
+			<en>{0}</en>
+			<de>{0}</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`ewire.core:WithLocations#locations`)"
+			supportsElement="element->$element.instanceOf(`ewire.core:Location`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				accessor="x -> $x"
+				columnId="ID_abc26501_f2d3_41bb_b4f7_7b0110b05396"
+				columnType="ewire.core:Location"
+			>
+				<columnLabel key="dynamic.3c4abc74-dbfa-4363-a394-f3d4c52bfe4b">
+					<en>Sub element</en>
+					<de>Unterelement</de>
+				</columnLabel>
+			</configurationProvider>
+		</configurationProviders>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/projectStructure/locationStructure/newSub_element/dialog.layout.xml"/>
+		</dialogs>
+		<component class="com.top_logic.mig.html.layout.LayoutReference$LayoutReferenceComponent"
+			resource="ewire-core/projects/projects/projectStructure/locationStructure/_0_/_0_Form.layout.xml"
+		/>
+	</arguments>
+</config:template-call>

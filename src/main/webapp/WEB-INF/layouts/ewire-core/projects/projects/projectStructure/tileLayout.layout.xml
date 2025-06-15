@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_64d3625c_ed30_4578_96f9_f53a8addee9b"
+		tileName="ID_e8ee549d_f821_434c_a0c2_9faf5a5f48bd"
+	>
+		<tileLabel key="dynamic.e0d57cc6-36c2-4b04-afb6-b3ef2220dcda">
+			<en>Project structure</en>
+			<de>Projektstruktur</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-solid fa-city"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/projectStructure/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

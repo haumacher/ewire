@@ -7,6 +7,7 @@
 	<arguments>
 		<components>
 			<layout-reference resource="ewire-core/projects/projects/structure/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/projectStructure/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/functions/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/functions1/tileLayout.layout.xml"/>
 		</components>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments model="selection(ewire-core/projects/projects/projectStructure/locationStructure/_0_ContextTable.layout.xml#Table)">
+		<name key="dynamic.72600271-8401-4bf9-93dc-2574cc9dce86">
+			<en>{0}</en>
+			<de>{0}</de>
+		</name>
+	</arguments>
+</config:template-call>

@@ -8,6 +8,20 @@
 			</generalizations>
 			<annotations>
 				<id-column value="label"/>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.functions:Function#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="location"
+							fullQualifiedName="ewire.functions:Function#location"
+							type="ewire.core:Location"
+						/>
+					</form>
+				</form-definition>
 			</annotations>
 			<attributes>
 				<property name="name"

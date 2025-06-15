@@ -105,6 +105,29 @@
 						</storage-algorithm>
 					</annotations>
 				</property>
+				<reference name="subElementTypes"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="tl.model:TLClass"
+				>
+					<annotations>
+						<visibility value="hidden"/>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[x -> $x.recursion(
+        // Find first non-generic location.
+        l -> $l.type() == `ewire.core:OtherLocation` ? $l.container() : null)
+    .lastElement()
+    .type()
+    .attribute("locations")
+    .get(`tl.model:TLStructuredTypePart#type`)
+    .recursion(t -> $t.referers(`tl.model:TLClass#generalizations`))
+    .filter(t -> !$t.get(`tl.model:TLClass#abstract`))]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</reference>
 			</attributes>
 		</interface>
 		<class name="Building">
