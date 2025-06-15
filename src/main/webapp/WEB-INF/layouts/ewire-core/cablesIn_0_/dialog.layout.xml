@@ -7,6 +7,7 @@
 	<arguments
 		defaultFor="ewire.core:Socket"
 		helpID="ID_320a5609_61a4_4b06_9917_6e73166848cb"
+		with-security-configuration="true"
 	>
 		<title class="com.top_logic.layout.component.title.ModelTitle"
 			model="model(self())"
@@ -24,6 +25,10 @@
 				<de>Doseninspektor</de>
 			</resourceKey>
 		</open-handler>
+		<security-label key="dynamic.41670fda-20e9-418d-8bfd-206e2752d8b6">
+			<en>Socket inspector</en>
+			<de>Doseninspektor</de>
+		</security-label>
 		<components>
 			<layout-reference resource="ewire-core/cablesIn_0_/innerLayout.layout.xml"/>
 		</components>

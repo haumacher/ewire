@@ -4,7 +4,10 @@
 	xmlns:config="http://www.top-logic.com/ns/config/6.0"
 	template="com.top_logic/dialog.template.xml"
 >
-	<arguments helpID="ID_b2fc807f_916d_4550_b585_998a846cef6f">
+	<arguments
+		helpID="ID_b2fc807f_916d_4550_b585_998a846cef6f"
+		with-security-configuration="true"
+	>
 		<title>
 			<title key="dynamic.ba20dd1c-a8cc-413b-8487-09e1c78ce7a9">
 				<en>Detail view</en>
@@ -19,6 +22,10 @@
 				<de>Detailanzeige</de>
 			</resourceKey>
 		</open-handler>
+		<security-label key="dynamic.ea80fe26-578d-4d1b-86da-334ab40b3d68">
+			<en>Global detail dialog</en>
+			<de>Globaler Detail-Dialog</de>
+		</security-label>
 		<components>
 			<layout-reference resource="ewire-core/detailView/innerLayout.layout.xml"/>
 		</components>
