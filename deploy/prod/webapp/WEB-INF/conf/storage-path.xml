@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<root>
+	<alias>
+        <entry name="%STORAGE_PATH%" value="/var/lib/tomcat10/work/ewire" />
+	</alias>
+</root>
+

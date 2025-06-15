@@ -1,1 +1,6 @@
-production-mode.xml
+db-h2.xml
+#devel-h2.xml
+enable-debug.xml
+#devel-dump-missing-resources.config.xml
+#production-mode.xml
+storage-path.xml

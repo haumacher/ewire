@@ -12,9 +12,6 @@
 			<layout-reference resource="ewire-core/projects/projects/structure/detailsForm.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
-			<layout-reference resource="ewire-core/projects/projects/structure/tabbar.layout.xml">
-				<layoutInfo/>
-			</layout-reference>
 		</components>
 	</arguments>
 </config:template-call>

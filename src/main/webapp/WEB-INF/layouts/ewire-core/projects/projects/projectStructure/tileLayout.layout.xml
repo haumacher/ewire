@@ -14,7 +14,11 @@
 		</tileLabel>
 		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
 			icon="css:fa-solid fa-city"
-		/>
+		>
+			<description key="dynamic.eb1b9c1a-5493-40d9-bb0b-513d4d60ef3e">
+				<de>Strukturbearbeitung optimiert für Mobilgeräte</de>
+			</description>
+		</preview>
 		<components>
 			<layout-reference resource="ewire-core/projects/projects/projectStructure/innerLayout.layout.xml"/>
 		</components>

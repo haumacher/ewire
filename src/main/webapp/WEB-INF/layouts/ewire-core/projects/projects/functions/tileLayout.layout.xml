@@ -14,7 +14,11 @@
 		</tileLabel>
 		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
 			icon="css:bi bi-lightbulb"
-		/>
+		>
+			<description key="dynamic.a23b63c8-6cf2-43ef-8111-2629f70861cd">
+				<de>Funktionen der Installation</de>
+			</description>
+		</preview>
 		<components>
 			<layout-reference resource="ewire-core/projects/projects/functions/innerLayout.layout.xml"/>
 		</components>
