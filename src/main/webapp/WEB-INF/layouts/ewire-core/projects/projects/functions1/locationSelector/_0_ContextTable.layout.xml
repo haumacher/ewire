@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileTable.template.xml"
+>
+	<arguments
+		defaultColumns="name,location"
+		helpID="ID_98755015_98a2_4e27_bfa7_d9fb07aa8d80"
+		model="selection(ewire-core/projects/projects/functions1/locationSelectorContextTree.layout.xml#Tree)"
+		type="ewire.functions:Function"
+	>
+		<name key="dynamic.d6a1962f-f6e2-4b07-93d0-5b98f6961ebd">
+			<en>{0}</en>
+			<de>{0}</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
+		>
+			<elements><![CDATA[model->$model.instanceOf(`ewire.core:Project`) 
+    ? $model.get(`ewire.core:Project#functions`)
+    : $model.referers(`ewire.functions:Function#location`)]]></elements>
+		</modelBuilder>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/functions1/locationSelector/newFunction/dialog.layout.xml"/>
+		</dialogs>
+		<component class="com.top_logic.mig.html.layout.LayoutReference$LayoutReferenceComponent"
+			resource="ewire-core/projects/projects/functions1/locationSelector/_0_/_0_Form.layout.xml"
+		/>
+	</arguments>
+</config:template-call>

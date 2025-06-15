@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments model="selection(ewire-core/projects/projects/functions1/locationSelector/_0_ContextTable.layout.xml#Table)">
+		<name key="dynamic.59423e91-50be-4e16-b1b5-16e9cfd46268">
+			<en>{0}</en>
+			<de>{0}</de>
+		</name>
+		<buttons>
+			<button id="ID_d412063d_fb86_4814_b2f8_74d69ca56082"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

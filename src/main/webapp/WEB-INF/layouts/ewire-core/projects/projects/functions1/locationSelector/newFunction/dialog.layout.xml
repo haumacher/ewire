@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/create/genericCreateDialog.template.xml"
+>
+	<arguments>
+		<title>
+			<title key="dynamic.3c53a4c7-0228-4060-8fa7-2f02174a1b26">
+				<en>New Function</en>
+				<de>Neue Funktion</de>
+			</title>
+		</title>
+		<open-handler id="ID_0419b757_ee1d_4412_8558_1e2b13d55688"
+			config:interface="com.top_logic.layout.editor.config.CreateDialogOpenHandlerConfig"
+			image="theme:ICONS_ADD_BUTTON"
+			target="selection(ewire-core/projects/projects/functions1/locationSelectorContextTree.layout.xml#Tree)"
+			targetComponent="ewire-core/projects/projects/functions1/locationSelector/newFunction/dialog.layout.xml#Editor"
+		>
+			<resourceKey key="dynamic.3c53a4c7-0228-4060-8fa7-2f02174a1b26">
+				<en>New Function</en>
+				<de>Neue Funktion</de>
+			</resourceKey>
+		</open-handler>
+		<typeOptions type="ewire.functions:Function"/>
+		<initialization><![CDATA[function -> location -> $location.instanceOf(`ewire.core:Location`)
+    ? $function.set(`ewire.functions:Function#location`, $location)
+    : $function.set(`ewire.functions:Function#location`, null)]]></initialization>
+		<create-handler id="ID_10811acf_5e48_417c_982e_aaa573ffe518">
+			<linkOperation><![CDATA[location -> function -> ($location.instanceOf(`ewire.core:Project`)
+        ? $location
+        : $location.recursion(
+            l -> $l.instanceOf(`ewire.core:Project`) ? null : $l.container())
+        .lastElement()
+    )
+    .add(`ewire.core:Project#functions`, $function)]]></linkOperation>
+		</create-handler>
+	</arguments>
+</config:template-call>

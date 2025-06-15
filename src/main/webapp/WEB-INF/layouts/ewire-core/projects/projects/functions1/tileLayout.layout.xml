@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_afb97e4b_4518_4bbb_8d8e_62e729868159"
+		tileName="ID_0c59ab44_91ac_4116_a60c_3ba48cab22ec"
+	>
+		<tileLabel key="dynamic.e3454ac7-c682-467a-9227-01b96288cf33">
+			<en>Functions</en>
+			<de>Funktionen</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:bi bi-lamp"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/functions1/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
