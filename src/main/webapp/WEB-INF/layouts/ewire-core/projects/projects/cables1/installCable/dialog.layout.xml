@@ -24,7 +24,13 @@
 			<executability>
 				<rule-by-expression show-disabled="true">
 					<decision><![CDATA[selection -> $selection.size() == 2
-    && $selection.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.core:Socket`))]]></decision>
+    && $selection.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.core:Socket`))
+    
+    ? true
+    : #(
+        "Es müssen zwei Dosen ausgewählt sein."@de,
+        "Two sockets have to be selected."@en
+    ) ]]></decision>
 				</rule-by-expression>
 			</executability>
 		</open-handler>
