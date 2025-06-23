@@ -9,5 +9,10 @@
 			<en>{0}</en>
 			<de>{0}</de>
 		</name>
+		<buttons>
+			<button id="ID_303ae71e_1e23_4c5c_8d38_485f61164ee6"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+			/>
+		</buttons>
 	</arguments>
 </config:template-call>
