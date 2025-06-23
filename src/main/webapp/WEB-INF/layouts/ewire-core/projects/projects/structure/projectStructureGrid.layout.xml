@@ -37,9 +37,11 @@
 				<type-options class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression"
 					include-subtypes="true"
 				>
-					<possible-types><![CDATA[x -> $x.singleElement().instanceOf(`ewire.core:Project`)
-    ? `ewire.core:Location`
-    : $x.get(`ewire.core:Location#subElementTypes`)]]></possible-types>
+					<possible-types><![CDATA[x -> $x.size() == 1
+    ? ($x.singleElement().instanceOf(`ewire.core:Project`)
+        ? `ewire.core:Location`
+        : $x.get(`ewire.core:Location#subElementTypes`))
+    : null]]></possible-types>
 				</type-options>
 			</button>
 			<button id="ID_bcc2e2ba_dda7_4b49_b104_8bacdfc43eaa"
