@@ -5,7 +5,7 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		defaultColumns="ID_3aaacce4_fd46_476a_af50_cab9e12f4564,id,cableType,connections,functions,description"
+		defaultColumns="ID_3aaacce4_fd46_476a_af50_cab9e12f4564,id,cableType,ID_09d0b6e0_8e51_4b32_a051_2dd522e2a4db,functions,description"
 		defaultSelection="false"
 		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
 		type="ewire.wires:Cable"
@@ -47,6 +47,17 @@
 						</postCreateActions>
 					</button>
 				</buttons>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_09d0b6e0_8e51_4b32_a051_2dd522e2a4db"
+				columnType="ewire.core:Socket"
+			>
+				<columnLabel key="dynamic.8fa80729-1721-4d0b-82a5-8b4a0f233827">
+					<en>Other end</en>
+					<de>Anderes Ende</de>
+				</columnLabel>
+				<accessor><![CDATA[cable -> socket -> $cable.get(`ewire.wires:Cable#connections`)
+    .filter(s -> $s != $socket)]]></accessor>
 			</configurationProvider>
 		</configurationProviders>
 		<buttons>
