@@ -74,14 +74,24 @@
 					<annotations>
 						<constraints>
 							<constraint-by-expression>
-								<check><![CDATA[connections -> $connections.size() >= 2 ||
+								<check><![CDATA[connections -> $connections.size() == 2 ||
 #(
-    "At least two sockets must be selected."@en,
-    "Es müssen mindestens zwei Dosen ausgewählt sein."@de
+    "Two sockets must be selected."@en,
+    "Es müssen zwei Dosen ausgewählt sein."@de
 )]]></check>
 							</constraint-by-expression>
 						</constraints>
-						<options-display/>
+						<options-display value="table"/>
+						<options>
+							<treeoptions-by-expression
+								children="x -> $x.get(`ewire.core:WithLocations#locations`)"
+								finite="true"
+								parents="x -> $x.referers(`ewire.core:WithLocations#locations`)"
+								rootNode="cable -> $cable.container()"
+								selection-filter="x -> $x.instanceOf(`ewire.core:Socket`)"
+								showRoot="false"
+							/>
+						</options>
 					</annotations>
 				</reference>
 				<reference name="functions"

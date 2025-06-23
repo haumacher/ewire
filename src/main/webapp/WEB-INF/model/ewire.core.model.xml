@@ -59,6 +59,7 @@
 				</form-definition>
 				<instance-presentation icon="css:fa-solid fa-location-dot"/>
 				<id-column value="label"/>
+				<main-properties properties="label"/>
 			</annotations>
 			<attributes>
 				<property name="name"

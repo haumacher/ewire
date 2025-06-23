@@ -21,7 +21,7 @@
 		<configurationProviders>
 			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
 				columnId="ID_3aaacce4_fd46_476a_af50_cab9e12f4564"
-				width="40px"
+				width="30px"
 			>
 				<columnLabel key="dynamic.ff150cca-555d-45e1-bcfb-d18424fc78e6">
 					<en>Show details</en>
