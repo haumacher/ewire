@@ -22,9 +22,12 @@
 				<de>Neues Unterelement</de>
 			</resourceKey>
 		</open-handler>
-		<typeOptions class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression">
-			<possible-types><![CDATA[x -> $x.get(`ewire.core:Location#subElementTypes`)
-    .sort(comparator(t -> $t.label()))]]></possible-types>
+		<typeOptions class="com.top_logic.model.search.providers.CreateTypeOptionsByExpression"
+			include-subtypes="true"
+		>
+			<possible-types><![CDATA[x -> $x.instanceOf(`ewire.core:Project`)
+    ? `ewire.core:Location`
+    : $x.get(`ewire.core:Location#subElementTypes`)]]></possible-types>
 		</typeOptions>
 		<create-handler id="ID_ef727f44_4cf2_4cfc_b4d4_1ef9b8616689"
 			linkOperation="parent -> location -> $parent.add(`ewire.core:WithLocations#locations`, $location)"
