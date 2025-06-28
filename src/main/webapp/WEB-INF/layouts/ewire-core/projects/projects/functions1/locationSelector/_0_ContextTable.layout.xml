@@ -5,7 +5,7 @@
 	template="com.top_logic/tileTable.template.xml"
 >
 	<arguments
-		defaultColumns="name,location"
+		defaultColumns="name,location,source,destination"
 		helpID="ID_98755015_98a2_4e27_bfa7_d9fb07aa8d80"
 		model="selection(ewire-core/projects/projects/functions1/locationSelectorContextTree.layout.xml#Tree)"
 		type="ewire.functions:Function"
