@@ -100,6 +100,23 @@ model->$model]]></elements>
                         $wire.get(`ewire.wires:Function#wire`).label()
                     )))
             )
+    )
+    .concat(
+        // Sockets without function.
+        $project.recursion(l -> $l.get(`ewire.core:WithLocations#locations`))
+            .filter(l -> $l.instanceOf(`ewire.core:Socket`))
+            .filter(s -> 
+                !$s.get(`ewire.core:Socket#distributor`)
+                && $s.referers(`ewire.functions:Function#destination`).isEmpty()
+                && $s.referers(`ewire.functions:Function#source`).isEmpty())
+            .map(s -> 
+                new(`ewire.validation:FunctionValidation`, transient: true)
+                ..set(`ewire.validation:FunctionValidation#socket`, $s)
+                ..set(`ewire.validation:FunctionValidation#result`, 
+                    `ewire.validation:ValidationResult#WARNING`)
+                ..set(`ewire.validation:FunctionValidation#description`, #(
+                    "Die Dose hat keine Funktion."@de,
+                    "The socket has no function."@en)))
     );
     
     overall = $validations

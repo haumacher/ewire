@@ -32,6 +32,11 @@
 						type="tl.core:Icon"
 					/>
 					<field
+						attribute="distributor"
+						fullQualifiedName="ewire.core:Socket#distributor"
+						type="tl.core:Boolean"
+					/>
+					<field
 						attribute="pictures"
 						fullQualifiedName="ewire.core:Location#pictures"
 						type="tl.imagegallery:GalleryImage"

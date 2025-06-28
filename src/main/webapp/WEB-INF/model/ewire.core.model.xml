@@ -140,6 +140,7 @@
 							<query>
 								<expr><![CDATA[x -> $x
     .recursion(x -> $x.instanceOf(`ewire.core:Project`) ? null : $x.container())
+    .filter(x -> $x.instanceOf(`ewire.core:Project`))
     .lastElement()]]></expr>
 							</query>
 						</storage-algorithm>
@@ -201,6 +202,46 @@
 			<generalizations>
 				<generalization type="OnWall"/>
 			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.core:Location#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="shortcut"
+							fullQualifiedName="ewire.core:Location#shortcut"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="icon"
+							fullQualifiedName="ewire.core:Location#icon"
+							type="tl.core:Icon"
+						/>
+						<field
+							attribute="distributor"
+							fullQualifiedName="ewire.core:Socket#distributor"
+							type="tl.core:Boolean"
+						/>
+						<field
+							attribute="pictures"
+							fullQualifiedName="ewire.core:Location#pictures"
+							type="tl.imagegallery:GalleryImage"
+						>
+							<annotations>
+								<render-whole-line/>
+							</annotations>
+						</field>
+						<field
+							attribute="description"
+							fullQualifiedName="ewire.core:Location#description"
+							type="tl.model.wysiwyg:Html"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
 			<attributes>
 				<reference name="connections"
 					composite="true"
@@ -208,6 +249,9 @@
 					multiple="true"
 					navigate="true"
 					type="ewire.connections:Connection"
+				/>
+				<property name="distributor"
+					type="tl.core:Boolean"
 				/>
 			</attributes>
 		</class>
