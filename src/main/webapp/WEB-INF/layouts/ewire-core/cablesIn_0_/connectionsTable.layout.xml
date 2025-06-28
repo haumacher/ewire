@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
+		type="ewire.connections:Connection"
+	>
+		<name key="dynamic.e4e59288-0cf0-49cf-b1d4-97aa9a2664db">
+			<en>Connections</en>
+			<de>Verbindungen</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`ewire.core:Socket#connections`)"
+			supportsElement="element->$element.instanceOf(`ewire.connections:Connection`)"
+		/>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_15ea7ab1_1d53_4665_b4e9_d15748aaeae2"
+				columnType="tl.core:String"
+			>
+				<columnLabel key="dynamic.a537869f-5926-4529-8a78-67240df7922d">
+					<en>Connected wires</en>
+					<de>Verbundene Adern</de>
+				</columnLabel>
+				<accessor><![CDATA[connection -> "{0}: {1}".fill(
+    $connection.get(`ewire.connections:Connection#wires`)
+        .firstElement()
+        .get(`ewire.wires:Function#function`)
+        .label(),
+    $connection.get(`ewire.connections:Connection#wires`)
+        .map(w -> "{0} ({1})".fill(
+            $w.container().get(`ewire.wires:Cable#id`),
+            $w.get(`ewire.wires:Function#wire`).label()))
+        .join(" + ")
+    )
+]]></accessor>
+				<annotations>
+					<column-info columnWidth="500">
+						<comparator class="com.top_logic.basic.col.ComparableComparator"/>
+					</column-info>
+				</annotations>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.layout.table.model.AllVisibleColumnsProvider"
+				columns="ID_15ea7ab1_1d53_4665_b4e9_d15748aaeae2"
+			/>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

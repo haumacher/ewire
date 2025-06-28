@@ -28,6 +28,31 @@
 				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
 				target="selection(self())"
 			/>
+			<button id="ID_f15e4c6f_ed8f_4d98_9e81_c0c0e2708751"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				clique="additional"
+				image="css:fa-solid fa-toolbox"
+			>
+				<resourceKey key="dynamic.1188412f-10b3-4996-8690-7c20a144aaa7">
+					<de>Fehlende Adern anlegen</de>
+					<tooltip>
+						<de>Wartungsfunktion, wenn beim Anlegen der Kabel nicht automatisch die passenden Adern angelegt wurden.</de>
+					</tooltip>
+				</resourceKey>
+				<operation><![CDATA[all(`ewire.wires:Cable`).foreach(cable -> {
+    existingWires = $cable.get(`ewire.wires:Cable#functions`);
+    existingTypes = $existingWires.map(w -> $w.get(`ewire.wires:Function#wire`));
+    missingTypes = $cable.get(`ewire.wires:Cable#cableType`)
+        .get(`ewire.wires:CableType#wires`)
+        .filter(t -> !$existingTypes.containsElement($t));
+    $cable.set(`ewire.wires:Cable#functions`,
+        $existingWires.concat($missingTypes.map(t -> 
+            new(`ewire.wires:Function`)
+            ..set(`ewire.wires:Function#wire`, $t)
+        ))
+    )
+})]]></operation>
+			</button>
 		</buttons>
 	</arguments>
 </config:template-call>

@@ -16,6 +16,11 @@
 							type="tl.core:String"
 						/>
 						<field
+							attribute="description"
+							fullQualifiedName="ewire.functions:Function#description"
+							type="tl.core:String"
+						/>
+						<field
 							attribute="location"
 							fullQualifiedName="ewire.functions:Function#location"
 							type="ewire.core:Location"
@@ -29,7 +34,14 @@
 							attribute="destination"
 							fullQualifiedName="ewire.functions:Function#destination"
 							type="ewire.core:Socket"
-						/>
+						>
+							<annotations>
+								<render-whole-line/>
+								<reference-display value="table"/>
+								<label-position value="hide-label"/>
+								<main-properties properties="label,description"/>
+							</annotations>
+						</field>
 					</form>
 				</form-definition>
 			</annotations>
@@ -93,6 +105,9 @@
 						</options>
 					</annotations>
 				</reference>
+				<property name="description"
+					type="tl.core:String"
+				/>
 			</attributes>
 		</class>
 	</module>

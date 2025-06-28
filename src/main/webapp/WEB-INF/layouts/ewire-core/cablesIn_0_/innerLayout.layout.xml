@@ -12,6 +12,9 @@
 			<layout-reference resource="ewire-core/cablesIn_0_/availableFunctionsTable.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
+			<layout-reference resource="ewire-core/cablesIn_0_/connectionsTable.layout.xml">
+				<layoutInfo/>
+			</layout-reference>
 		</components>
 	</arguments>
 </config:template-call>

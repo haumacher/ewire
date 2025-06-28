@@ -6,12 +6,13 @@
 >
 	<arguments
 		defaultColumns="name,location,source,destination"
+		defaultSelection="false"
 		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
 		type="ewire.functions:Function"
 	>
 		<name key="dynamic.8df142c2-e0c7-424a-af63-b7a5979043cb">
-			<en>Available functions</en>
-			<de>Verfügbare Funktionen</de>
+			<en>Available/required functions</en>
+			<de>Verfügbare/Benötigte Funktionen</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
 			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
@@ -22,6 +23,7 @@
         .get(`ewire.wires:Function#function`))
     .flatten()
     .concat($socket.referers(`ewire.functions:Function#source`))
+    .concat($socket.referers(`ewire.functions:Function#destination`))
     .toSet()]]></elements>
 		</modelBuilder>
 		<buttons>

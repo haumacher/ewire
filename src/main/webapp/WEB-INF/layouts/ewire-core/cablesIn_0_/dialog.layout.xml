@@ -6,7 +6,9 @@
 >
 	<arguments
 		defaultFor="ewire.core:Socket"
+		height="100%"
 		helpID="ID_320a5609_61a4_4b06_9917_6e73166848cb"
+		width="100%"
 		with-security-configuration="true"
 	>
 		<title class="com.top_logic.layout.component.title.ModelTitle"

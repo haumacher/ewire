@@ -131,12 +131,16 @@ switch {
     wires = $input[0];
     socket = $input[1];
 
+    // The (single) function that is already assigned to some of the wires 
+    // that should be connected.
     function = $wires
         .map(w -> $w.get(`ewire.wires:Function#function`))
         .filter(f -> $f != null)
         .toSet()
         .singleElement();
-        
+       
+    // The existing connection or a newly allocated, if none of the selected
+    // wires is already part of some connection.
     connection = $socket
         .get(`ewire.core:Socket#connections`)
         .filter(c -> $c.get(`ewire.connections:Connection#wires`)
@@ -145,13 +149,18 @@ switch {
         || new(`ewire.connections:Connection`)
             ..map(x -> $socket.add(`ewire.core:Socket#connections`, $x));
 
+    // Add those wires to the connection that are not yet part of it.
     $wires
         .filter(w -> !$connection.get(`ewire.connections:Connection#wires`)
             .containsElement($w))
         .foreach(w -> 
             $connection.add(`ewire.connections:Connection#wires`, $w));
 
-    $wires.foreach(w -> $w.set(`ewire.wires:Function#function`, $function))
+    $wires
+        ..foreach(w -> $w.set(`ewire.wires:Function#function`, $function))
+        // Touch wire, to update the "connected" state, (if wire 
+        // was already assigned the function explicitly)
+//        ..foreach(w -> $w.touch())
 }]]></operation>
 			</button>
 			<button id="ID_70cf6a92_e221_494d_a384_52118f244af8"
@@ -234,6 +243,58 @@ switch {
     $touchedWires
         .filter(w -> !$w.get(`ewire.wires:Function#connected`))
         .foreach(w -> $w.set(`ewire.wires:Function#function`, null))
+}]]></operation>
+			</button>
+			<button id="ID_dd988df3_f762_45fd_9ecf_6685e8efe53d"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				image="css:fa-solid fa-check-to-slot"
+			>
+				<resourceKey key="dynamic.db84a992-b796-400c-9dd8-b7c97c7a61d5">
+					<de>Funktion zuweisen</de>
+					<tooltip>
+						<de>Weist die unten ausgewählte Funktion explizit einer noch nicht verbundenen Ader zu.</de>
+					</tooltip>
+				</resourceKey>
+				<target class="com.top_logic.layout.channel.linking.impl.CombineLinking">
+					<channel name="selection">
+						<relation/>
+					</channel>
+					<channel name="selection">
+						<target name="ewire-core/cablesIn_0_/availableFunctionsTable.layout.xml#Table"/>
+					</channel>
+				</target>
+				<executability>
+					<rule-by-expression show-disabled="true">
+						<decision><![CDATA[input -> {
+    wires = $input[0];
+    function = $input[1];
+    
+    switch {
+        $wires.isEmpty(): #(
+            "Es muss eine Ader ausgewählt sein."@de
+        );
+        
+        $function == null: #(
+            "Es muss eine Funktion ausgewählt sein."@de
+        );
+
+        !$wires.reduce(true, a -> w -> $a && $w.instanceOf(`ewire.wires:Function`)): #(
+            "Es dürfen nur Adern ausgewählt sein."@de
+        );
+        
+        !$wires.reduce(true, a -> w -> $a && $w.get(`ewire.wires:Function#function`) == null): #(
+            "Es dürfen nur leere Adern ausgewählt sein."@de
+        );
+    }
+}]]></decision>
+					</rule-by-expression>
+				</executability>
+				<operation><![CDATA[input -> {
+    wires = $input[0];
+    function = $input[1];
+ 
+    $wires.foreach(w -> $w
+        .set(`ewire.wires:Function#function`, $function))
 }]]></operation>
 			</button>
 		</buttons>
