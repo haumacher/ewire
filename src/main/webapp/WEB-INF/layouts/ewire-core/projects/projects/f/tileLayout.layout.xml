@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_2e0d810f_4dda_4193_871d_699c95b94125"
+		tileName="ID_e15311b0_9d48_41ec_afa6_7265765a8366"
+	>
+		<tileLabel key="dynamic.026b1f54-17d8-457a-be36-73c6b00c5891">
+			<de>F</de>
+		</tileLabel>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/f/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

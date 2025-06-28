@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/genericForm.template.xml"
+>
+	<arguments buttonbar="true">
+		<name key="dynamic.a4311f52-2ace-4250-baf8-1e19e026be4f">
+			<de>Eingabe</de>
+		</name>
+		<model class="com.top_logic.model.search.providers.TransformLinkingByExpression"
+			function="input -> $input[1]"
+			input="model(ewire-core/projects/projects/f/funktionsliste/orteZuweisen/dialog.layout.xml#Dialog)"
+		/>
+		<modelBuilder class="com.top_logic.model.search.providers.MonomorphicCreateFormBuilderByExpression"
+			formType="ewire.functions:Function"
+		>
+			<forms>
+				<form type="ewire.functions:Function">
+					<formDefinition>
+						<field
+							attribute="source"
+							fullQualifiedName="ewire.functions:Function#source"
+							type="ewire.core:Socket"
+						/>
+						<field
+							attribute="destination"
+							fullQualifiedName="ewire.functions:Function#destination"
+							type="ewire.core:Socket"
+						/>
+					</formDefinition>
+				</form>
+			</forms>
+		</modelBuilder>
+		<buttons>
+			<button id="ID_26a3fd94_87c6_40df_a96a_4464040909d7"
+				class="com.top_logic.model.search.providers.TransactionHandlerByExpression"
+				image="css:fa-solid fa-check"
+				target="model(ewire-core/projects/projects/f/funktionsliste/orteZuweisen/dialog.layout.xml#Dialog)"
+			>
+				<resourceKey key="dynamic.6880e8af-a206-4d94-887e-15becb3f19b2">
+					<de>Zuweisen</de>
+				</resourceKey>
+				<operation><![CDATA[form -> input -> {
+    selection = $input[0];
+    
+    if ($form.get(`ewire.functions:Function#source`) != null, {
+        $selection.foreach(f -> $f
+            .set(`ewire.functions:Function#source`, 
+                $form.get(`ewire.functions:Function#source`)))
+    });
+    
+    if (!$form.get(`ewire.functions:Function#destination`).isEmpty(), {
+        $selection.foreach(f -> $f
+            .set(`ewire.functions:Function#destination`, 
+                $f.get(`ewire.functions:Function#destination`)
+                .concat(
+                    $form.get(`ewire.functions:Function#destination`)))
+                .toSet()
+        )
+    });
+
+}]]></operation>
+			</button>
+		</buttons>
+	</arguments>
+</config:template-call>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/dialog.template.xml"
+>
+	<arguments
+		height="250px"
+		helpID="ID_cf20140d_84b9_486c_b5d2_e44e026b655e"
+	>
+		<title>
+			<title key="dynamic.e7ee852e-aba3-43c6-9d34-f8c5b1414d45">
+				<de>Orte zuweisen</de>
+			</title>
+		</title>
+		<open-handler id="ID_bcef9a68_7b12_4924_be36_25cae2936e11"
+			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
+			image="css:fa-solid fa-arrows-left-right"
+			targetComponent="ewire-core/projects/projects/f/funktionsliste/orteZuweisen/dialog.layout.xml#Dialog"
+		>
+			<resourceKey key="dynamic.e7ee852e-aba3-43c6-9d34-f8c5b1414d45">
+				<de>Quellen zuweisen</de>
+			</resourceKey>
+			<target class="com.top_logic.layout.channel.linking.impl.CombineLinking">
+				<channel name="selection">
+					<relation/>
+				</channel>
+				<channel name="model">
+					<relation/>
+				</channel>
+			</target>
+			<executability>
+				<rule-by-expression show-disabled="true">
+					<decision><![CDATA[input -> $input[0].size() > 1
+    ? true
+    : #(
+        "Für Massenbearbeitung muss mehr als eine Funktion ausgewählt sein."@de,
+        "For mass-edit, more than one function must be selected."@en
+    )]]></decision>
+				</rule-by-expression>
+			</executability>
+		</open-handler>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/f/funktionsliste/orteZuweisen/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

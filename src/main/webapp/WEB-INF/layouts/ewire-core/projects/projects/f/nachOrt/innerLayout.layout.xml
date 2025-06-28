@@ -6,7 +6,7 @@
 >
 	<arguments>
 		<components>
-			<layout-reference resource="ewire-core/projects/projects/f/_0_GroupTile.layout.xml">
+			<layout-reference resource="ewire-core/projects/projects/functions1/locationSelectorContextTree.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
 		</components>
