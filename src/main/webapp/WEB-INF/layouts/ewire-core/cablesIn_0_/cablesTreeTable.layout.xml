@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/treetable.template.xml"
+>
+	<arguments
+		defaultColumns="ID_3aaacce4_fd46_476a_af50_cab9e12f4564,label,ID_09d0b6e0_8e51_4b32_a051_2dd522e2a4db,connected,description"
+		defaultSelection="false"
+		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
+		multiSelection="true"
+		rootVisible="false"
+		type="ewire.wires:Function,ewire.wires:Cable"
+	>
+		<name key="dynamic.dd624b55-3b9b-4228-9b2d-ad964a357893">
+			<en>Cables</en>
+			<de>Kabel</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			nodePredicate="node-> true"
+			rootNode="socket -> $socket"
+		>
+			<children><![CDATA[node->switch {
+    $node.instanceOf(`ewire.core:Socket`): 
+        $node.referers(`ewire.wires:Cable#connections`);
+    $node.instanceOf(`ewire.wires:Cable`): 
+        $node.get(`ewire.wires:Cable#functions`);
+}]]></children>
+			<parents><![CDATA[node->switch {
+    $node.instanceOf(`ewire.wires:Function`): 
+        $node.referers(`ewire.wires:Cable#functions`);
+    $node.instanceOf(`ewire.wires:Cable`): 
+        $node.get(`ewire.wires:Cable#connections`);
+}]]></parents>
+		</modelBuilder>
+		<configurationProviders>
+			<id-column value="label"/>
+			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
+				columnId="ID_3aaacce4_fd46_476a_af50_cab9e12f4564"
+				width="30px"
+			>
+				<columnLabel key="dynamic.ff150cca-555d-45e1-bcfb-d18424fc78e6">
+					<en>Show details</en>
+					<de>Details anzeigen</de>
+				</columnLabel>
+				<buttons>
+					<button id="ID_1d948316_b0c7_48fd_9f0d_da7a4b70af60"
+						class="com.top_logic.tool.boundsec.OpenModalDialogCommandHandler"
+						dialog-name="ewire-core/detailView/dialog.layout.xml#Dialog"
+						group="Write"
+						image="css:fa-solid fa-pen"
+						targetComponent="ewire-core/detailView/detailsForm.layout.xml#Form"
+					>
+						<resourceKey key="dynamic.bc2d621f-88ca-4911-87a1-cfea11e06db8">
+							<en>Edit</en>
+							<de>Bearbeiten</de>
+						</resourceKey>
+						<executability>
+							<rule-by-expression decision="x -> $x.instanceOf(`ewire.wires:Cable`)"/>
+						</executability>
+						<postCreateActions>
+							<setEditMode>
+								<global-target name="ewire-core/detailView/detailsForm.layout.xml#Form"/>
+							</setEditMode>
+						</postCreateActions>
+					</button>
+				</buttons>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_09d0b6e0_8e51_4b32_a051_2dd522e2a4db"
+				columnType="ewire.core:Socket"
+			>
+				<columnLabel key="dynamic.8fa80729-1721-4d0b-82a5-8b4a0f233827">
+					<en>Other end</en>
+					<de>Anderes Ende</de>
+				</columnLabel>
+				<accessor><![CDATA[cable -> socket -> $cable.get(`ewire.wires:Cable#connections`)
+    .filter(s -> $s != $socket)]]></accessor>
+			</configurationProvider>
+		</configurationProviders>
+		<buttons>
+			<button id="ID_493e5bf0_e131_4d9f_9343_a5695fa4a35e"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				image="css:fa-solid fa-link"
+			>
+				<resourceKey key="dynamic.152e3dbb-c5d4-4c22-a6a0-e6d2e87cd472">
+					<en>Connect wires</en>
+					<de>Adern verbinden</de>
+				</resourceKey>
+				<target class="com.top_logic.layout.channel.linking.impl.CombineLinking">
+					<channel name="selection">
+						<relation/>
+					</channel>
+					<channel name="model">
+						<relation/>
+					</channel>
+				</target>
+				<executability>
+					<rule-by-expression show-disabled="true">
+						<decision><![CDATA[input -> {
+wires = $input[0];
+
+switch {
+    // More than one selected
+    $wires.size() <= 1: #(
+        "Mindestens zwei Adern müssen ausgewählt sein."@de,
+        "At least two wires must be selected."@en
+    );
+    
+    // All wires.
+    !$wires.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.wires:Function`)): #(
+        "Es dürfen nur Adern ausgewählt sein"@de,
+        "Only wires must be selected"@en
+    );
+    
+    $wires
+        .map(w -> $w.get(`ewire.wires:Function#function`))
+        .filter(f -> $f != null)
+        .toSet()
+        .size() != 1: #(
+        "Adern ohne oder mit unterschiedlicher Funktion können nicht verbunden werden."@de,
+        "Wires without or with different functions cannot be connected."@en
+    );
+    
+    default: true;
+}
+}]]></decision>
+					</rule-by-expression>
+				</executability>
+				<operation><![CDATA[input -> {
+    wires = $input[0];
+    socket = $input[1];
+
+    function = $wires
+        .map(w -> $w.get(`ewire.wires:Function#function`))
+        .filter(f -> $f != null)
+        .toSet()
+        .singleElement();
+        
+    connection = $socket
+        .get(`ewire.core:Socket#connections`)
+        .filter(c -> $c.get(`ewire.connections:Connection#wires`)
+            .containsSome($wires))
+        .singleElement()
+        || new(`ewire.connections:Connection`)
+            ..map(x -> $socket.add(`ewire.core:Socket#connections`, $x));
+
+    $wires
+        .filter(w -> !$connection.get(`ewire.connections:Connection#wires`)
+            .containsElement($w))
+        .foreach(w -> 
+            $connection.add(`ewire.connections:Connection#wires`, $w));
+
+    $wires.foreach(w -> $w.set(`ewire.wires:Function#function`, $function))
+}]]></operation>
+			</button>
+			<button id="ID_70cf6a92_e221_494d_a384_52118f244af8"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				image="css:fa-solid fa-link-slash"
+			>
+				<resourceKey key="dynamic.497fa631-64ba-4262-ac6d-17ca8f824805">
+					<en>Release from connection</en>
+					<de>Aus Verbindung lösen</de>
+				</resourceKey>
+				<target class="com.top_logic.layout.channel.linking.impl.CombineLinking">
+					<channel name="selection">
+						<relation/>
+					</channel>
+					<channel name="model">
+						<relation/>
+					</channel>
+				</target>
+				<executability>
+					<rule-by-expression show-disabled="true">
+						<decision><![CDATA[input -> {
+wires = $input[0];
+socket = $input[1];
+
+switch {
+    $wires.isEmpty(): #(
+        "Mindestens eine Ader muss ausgewählt sein."@de,
+        "At least one wire must be selected."@en
+    );
+
+    // All wires.
+    !$wires.reduce(true, a -> b -> $a && $b.instanceOf(`ewire.wires:Function`)): #(
+        "Es dürfen nur Adern ausgewählt sein"@de,
+        "Only wires must be selected"@en
+    );
+    
+    !$wires.filter(w -> $w
+        // Connections connecting the wire.
+        .referers(`ewire.connections:Connection#wires`)
+        // Only if located in current socket.
+        .filter(con -> $con.container() == $socket)
+        // Whether not connected here.
+        .isEmpty()).isEmpty(): #(
+        "Es dürfen nur Adern ausgewählt sein, die eine Verbindung haben."@de,
+        "Only wires with connection must be selected."@en
+    );
+    
+    default: true;
+}
+}]]></decision>
+					</rule-by-expression>
+				</executability>
+				<operation><![CDATA[input -> {
+    wires = $input[0];
+    socket = $input[1];
+
+    connections = $wires.map(w -> $w
+        // Connections connecting the wire.
+        .referers(`ewire.connections:Connection#wires`)
+        // Only if located in current socket.
+        .filter(con -> $con.container() == $socket)
+        .singleElement());
+        
+    touchedWires = $connections
+        .map(con -> $con.get(`ewire.connections:Connection#wires`))
+        .flatten();
+
+    // Remove wires from connections.
+    $connections.foreach(con -> {
+        remaining = $con
+            .get(`ewire.connections:Connection#wires`)
+            .filter(w -> !$wires.containsElement($w));
+        
+        $remaining.size() < 2
+            ? $con.delete()
+            : $con.set(`ewire.connections:Connection#wires`, $remaining);
+    });
+
+    // Reset functions on non longer connected wires.
+    $touchedWires
+        .filter(w -> !$w.get(`ewire.wires:Function#connected`))
+        .foreach(w -> $w.set(`ewire.wires:Function#function`, null))
+}]]></operation>
+			</button>
+		</buttons>
+	</arguments>
+</config:template-call>

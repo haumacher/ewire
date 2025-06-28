@@ -6,7 +6,7 @@
 >
 	<arguments orientation="VERTICAL">
 		<components>
-			<layout-reference resource="ewire-core/cablesIn_0_/cablesTable.layout.xml">
+			<layout-reference resource="ewire-core/cablesIn_0_/cablesTreeTable.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
 			<layout-reference resource="ewire-core/cablesIn_0_/availableFunctionsTable.layout.xml">

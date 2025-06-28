@@ -117,6 +117,20 @@
 				<property name="description"
 					type="tl.core:String"
 				/>
+				<property name="label"
+					type="tl.core:String"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[cable -> "{0} ({1})".fill(
+    $cable.get(`ewire.wires:Cable#id`),
+    $cable.get(`ewire.wires:Cable#cableType`).label()
+)]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
 			</attributes>
 		</class>
 		<class name="CableType">
