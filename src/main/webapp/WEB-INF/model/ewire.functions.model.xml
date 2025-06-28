@@ -20,6 +20,16 @@
 							fullQualifiedName="ewire.functions:Function#location"
 							type="ewire.core:Location"
 						/>
+						<field
+							attribute="source"
+							fullQualifiedName="ewire.functions:Function#source"
+							type="ewire.core:Socket"
+						/>
+						<field
+							attribute="destination"
+							fullQualifiedName="ewire.functions:Function#destination"
+							type="ewire.core:Socket"
+						/>
 					</form>
 				</form-definition>
 			</annotations>
@@ -48,6 +58,41 @@
 						</storage-algorithm>
 					</annotations>
 				</property>
+				<reference name="source"
+					kind="forwards"
+					navigate="true"
+					type="ewire.core:Socket"
+				>
+					<annotations>
+						<options>
+							<treeoptions-by-expression
+								children="p -> $p.get(`ewire.core:WithLocations#locations`)"
+								parents="p -> $p.referers(`ewire.core:WithLocations#locations`)"
+								rootNode="f -> $f.container()"
+								selection-filter="p -> $p.instanceOf(`ewire.core:Socket`)"
+							/>
+						</options>
+					</annotations>
+				</reference>
+				<reference name="destination"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.core:Socket"
+				>
+					<annotations>
+						<options>
+							<treeoptions-by-expression
+								children="p -> $p.get(`ewire.core:WithLocations#locations`)"
+								finite="true"
+								parents="p -> $p.referers(`ewire.core:WithLocations#locations`)"
+								rootNode="f -> $f.container()"
+								selection-filter="p -> $p.instanceOf(`ewire.core:Socket`)"
+								showRoot="false"
+							/>
+						</options>
+					</annotations>
+				</reference>
 			</attributes>
 		</class>
 	</module>
