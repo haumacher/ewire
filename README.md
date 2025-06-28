@@ -10,7 +10,9 @@ werden müssen.
 ## Entwicklungsversion
 
 Die Anwendung ist als Konfiguration der modellbasierten no-code Platform [TopLogic](https://github.com/top-logic/tl-engine) 
-realisiert. Ein lokaler Start als Entwickungs- und Konfigurationsumgebung benötigt eine installiertes Java 17 und Apache Maven. 
+realisiert. Ein lokaler Start als Entwickungs- und Konfigurationsumgebung benötigt eine installiertes 
+[Java 17](https://adoptium.net/temurin/releases/?version=17&os=any&arch=any) und 
+[Apache Maven](https://maven.apache.org/download.cgi). 
 Mit diesen Voraussetzungen ist ein Start mit den folgenden Schritten möglich:
 
 ```
@@ -31,7 +33,9 @@ because this type of installation requires a large number of cables to be laid f
 ## Development version
 
 The application is implemented as a configuration of the model-based no-code platform [TopLogic](https://github.com/top-logic/tl-engine). 
-A local start as development and configuration environment requires an installed Java 17 and Apache Maven. 
+A local start as development and configuration environment requires an installed 
+[Java 17](https://adoptium.net/temurin/releases/?version=17&os=any&arch=any) and 
+[Apache Maven](https://maven.apache.org/download.cgi).  
 With these prerequisites, a start with the following steps is possible:
 
 ```
