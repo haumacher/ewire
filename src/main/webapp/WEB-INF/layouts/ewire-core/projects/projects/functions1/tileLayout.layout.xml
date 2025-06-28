@@ -13,7 +13,7 @@
 			<de>Funktionen</de>
 		</tileLabel>
 		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
-			icon="css:bi bi-lamp"
+			icon="css:bi bi-lightbulb"
 		>
 			<description key="dynamic.83a41f0b-3184-484a-b1c7-afce7326eee3">
 				<de>Funktionsbearbeitung für Mobilgeräte</de>
