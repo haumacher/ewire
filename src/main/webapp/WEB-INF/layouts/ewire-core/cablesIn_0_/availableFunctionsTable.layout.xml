@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="name,location,source,destination"
+		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
+		type="ewire.functions:Function"
+	>
+		<name key="dynamic.8df142c2-e0c7-424a-af63-b7a5979043cb">
+			<en>Available functions</en>
+			<de>Verfügbare Funktionen</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
+		>
+			<elements><![CDATA[socket->$socket.referers(`ewire.wires:Cable#connections`)
+    .map(cable -> $cable
+        .get(`ewire.wires:Cable#functions`)
+        .get(`ewire.wires:Function#function`))
+    .flatten()
+    .concat($socket.referers(`ewire.functions:Function#source`))
+    .toSet()]]></elements>
+		</modelBuilder>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

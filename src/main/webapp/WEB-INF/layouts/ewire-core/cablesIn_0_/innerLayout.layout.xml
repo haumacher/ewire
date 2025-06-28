@@ -4,9 +4,12 @@
 	xmlns:config="http://www.top-logic.com/ns/config/6.0"
 	template="com.top_logic/contentLayout.template.xml"
 >
-	<arguments>
+	<arguments orientation="VERTICAL">
 		<components>
 			<layout-reference resource="ewire-core/cablesIn_0_/cablesTable.layout.xml">
+				<layoutInfo/>
+			</layout-reference>
+			<layout-reference resource="ewire-core/cablesIn_0_/availableFunctionsTable.layout.xml">
 				<layoutInfo/>
 			</layout-reference>
 		</components>
