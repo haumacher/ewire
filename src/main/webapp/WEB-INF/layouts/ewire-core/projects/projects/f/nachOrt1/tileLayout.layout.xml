@@ -5,18 +5,17 @@
 	template="com.top_logic/tile.template.xml"
 >
 	<arguments
-		helpID="ID_8de84eb1_23a2_4720_9f67_a074556f1983"
-		tileName="ID_157276ca_4771_4768_9e5b_13a07fa8d83a"
+		helpID="ID_2caeffe7_a85e_48f1_9b94_bbd67250722c"
+		tileName="ID_c3bd404f_e1b4_4f7b_8542_1151f348f065"
 	>
-		<tileLabel key="dynamic.7e20cda2-9431-4fdc-ad57-11a456b17776">
-			<en>Functions</en>
-			<de>Funktionen</de>
+		<tileLabel key="dynamic.ed4db1c1-6c7b-4176-b8b6-1f444afce770">
+			<de>Nach Ort</de>
 		</tileLabel>
 		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
-			icon="css:bi bi-lightbulb"
+			icon="css:fa-solid fa-location-pin"
 		>
-			<description key="dynamic.a23b63c8-6cf2-43ef-8111-2629f70861cd">
-				<de>Funktionen der Installation</de>
+			<description key="dynamic.a1a21ab9-e81f-4eb6-a33b-a4da5fdc64cf">
+				<de>Desktop-Ansicht für die Funktionserstellung.</de>
 			</description>
 		</preview>
 		<components>

@@ -13,7 +13,11 @@
 		</tileLabel>
 		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
 			icon="css:fa-solid fa-location-dot"
-		/>
+		>
+			<description key="dynamic.c2af0092-b2bc-4a03-8c66-67f0f739189e">
+				<de>Mobil-Ansicht für die Funktionserstellung.</de>
+			</description>
+		</preview>
 		<components>
 			<layout-reference resource="ewire-core/projects/projects/f/nachOrt/innerLayout.layout.xml"/>
 		</components>
