@@ -201,6 +201,15 @@
 			<generalizations>
 				<generalization type="OnWall"/>
 			</generalizations>
+			<attributes>
+				<reference name="connections"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.connections:Connection"
+				/>
+			</attributes>
 		</class>
 		<class name="Wall">
 			<generalizations>

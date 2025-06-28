@@ -223,10 +223,34 @@
 				</property>
 				<reference name="function"
 					kind="forwards"
-					mandatory="true"
 					navigate="true"
 					type="ewire.functions:Function"
 				/>
+				<property name="connected"
+					type="tl.core:Boolean"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[wire -> $wire
+    // All connected wires.
+    .recursion(w -> $w
+        .referers(`ewire.connections:Connection#wires`)
+        .get(`ewire.connections:Connection#wires`))
+    // Their cables
+    .map(w -> $w.container())
+    // Their sockets.
+    .map(cable -> $cable.get(`ewire.wires:Cable#connections`))
+    .flatten()
+    .containsElement($wire
+        // The assigned function
+        .get(`ewire.wires:Function#function`)
+        // Their source/defining socket
+        .get(`ewire.functions:Function#source`))]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
 			</attributes>
 		</class>
 		<class name="WireType">
