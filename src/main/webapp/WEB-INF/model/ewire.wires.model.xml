@@ -171,12 +171,39 @@
 					<annotations>
 						<options>
 							<options-by-expression>
-								<function><![CDATA[fun -> $fun.container()
-    .get(`ewire.wires:Cable#cableType`)
-    .get(`ewire.wires:CableType#wires`)]]></function>
+								<function><![CDATA[fun -> {
+    cable = $fun.container();
+    assignedWires = $cable
+        .get(`ewire.wires:Cable#functions`)
+        .get(`ewire.wires:Function#wire`);
+    $cable
+        .get(`ewire.wires:Cable#cableType`)
+        .get(`ewire.wires:CableType#wires`)
+//        .filter(w -> !$assignedWires.containsElement($w))
+}]]></function>
 							</options-by-expression>
 						</options>
 						<reference-display value="drop-down"/>
+						<constraints>
+							<constraint-by-expression>
+								<check><![CDATA[wire -> fun -> {
+    cable = $fun.container();
+    duplicateWires = $cable
+        .get(`ewire.wires:Cable#functions`)
+        .groupBy(f -> $f.get(`ewire.wires:Function#wire`))
+        .filter(e -> $e.getValue().size() > 1)
+        .map(e -> $e.getKey());
+        
+    !$duplicateWires.containsElement($wire)
+        ? true : 
+        #(
+            "Jede Ader darf nur einmal ausgewählt werden: {0}"@de,
+            "Each wire must be selected at most once: {0}"@en
+        )
+        .fill($duplicateWires)
+}]]></check>
+							</constraint-by-expression>
+						</constraints>
 					</annotations>
 				</reference>
 				<property name="label"
