@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="result,function,socket,description"
+		type="ewire.validation:FunctionValidation"
+	>
+		<name key="dynamic.70366ee1-34e6-4575-aa7a-1bf332cde6bf">
+			<en>Validation result</en>
+			<de>Validierungsergebnis</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			supportsElement="element->$element.instanceOf(`ewire.validation:FunctionValidation`)"
+		>
+			<elements><![CDATA[// List of validation results is delivered by button click.
+model->$model]]></elements>
+		</modelBuilder>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="ID_553bea61_88d0_4daf_86bd_ec2a910e0dc2"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				image="css:fa-solid fa-arrow-rotate-right"
+				target="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+				transaction="false"
+			>
+				<resourceKey key="dynamic.bd3f16dc-daad-4c02-b79c-6d4ff103eafc">
+					<en>Start validation</en>
+					<de>Validierung starten</de>
+				</resourceKey>
+				<operation><![CDATA[project -> {
+    functions = $project.get(`ewire.core:Project#functions`);
+    
+    validations = $functions.map(f -> {
+        destinations = $f.get(`ewire.functions:Function#destination`);
+
+        $destinations.map(s -> {
+            cables = $s.referers(`ewire.wires:Cable#connections`);
+            wiresProviding = $cables.get(`ewire.wires:Cable#functions`)
+                .filter(w -> $w.get(`ewire.wires:Function#function`) == $f);
+
+            connectedWires = $wiresProviding
+                .filter(w -> $w.get(`ewire.wires:Function#connected`));
+        
+            new(`ewire.validation:FunctionValidation`, transient: true)
+            ..set(`ewire.validation:FunctionValidation#function`, $f)
+            ..set(`ewire.validation:FunctionValidation#socket`, $s)
+            ..map(validation ->
+                switch {
+                    $wiresProviding.isEmpty(): 
+                        $validation
+                        ..set(`ewire.validation:FunctionValidation#result`, 
+                            `ewire.validation:ValidationResult#ERROR`)
+                        ..set(`ewire.validation:FunctionValidation#description`, #(
+                            "Keine Ader liefert die Funktion."@de,
+                            "No wire delivers the function."@en
+                        ));
+
+                    $connectedWires.isEmpty(): 
+                        $validation
+                        ..set(`ewire.validation:FunctionValidation#result`, 
+                            `ewire.validation:ValidationResult#ERROR`)
+                        ..set(`ewire.validation:FunctionValidation#description`, #(
+                            "Ader mit Funktion ist nicht verbunden."@de,
+                            "Wire with function is not connected."@en
+                        ));
+                    
+                    default:
+                        $validation
+                        ..set(`ewire.validation:FunctionValidation#result`, 
+                            `ewire.validation:ValidationResult#OK`);
+            })
+        })
+    })
+    .flatten()
+    .concat(
+        $project.get(`ewire.core:Project#cables`)
+            .get(`ewire.wires:Cable#functions`)
+            .filter(wire -> $wire.get(`ewire.wires:Function#function`) != null)
+            .filter(wire -> !$wire.get(`ewire.wires:Function#connected`))
+            .map(wire -> 
+                new(`ewire.validation:FunctionValidation`, transient: true)
+                ..set(`ewire.validation:FunctionValidation#function`, 
+                    $wire.get(`ewire.wires:Function#function`))
+                ..set(`ewire.validation:FunctionValidation#socket`, 
+                    $wire.container()
+                    .get(`ewire.wires:Cable#connections`)
+                    .firstElement())
+                ..set(`ewire.validation:FunctionValidation#result`, 
+                    `ewire.validation:ValidationResult#WARNING`)
+                ..set(`ewire.validation:FunctionValidation#description`, #(
+                    "Funktion wird nicht wie geplant an {0} geliefert."@de,
+                    "Funktion not delevered to designated wire {0}."@en)
+                    .fill("{0} ({1})".fill(
+                        $wire.container().get(`ewire.wires:Cable#id`),
+                        $wire.get(`ewire.wires:Function#wire`).label()
+                    )))
+            )
+    );
+    
+    overall = $validations
+        .map(v -> $v.get(`ewire.validation:FunctionValidation#result`))
+        .sort(comparator(r -> $r.get(`tl.model:TLClassifier#index`)))
+        .lastElement() || `ewire.validation:ValidationResult#OK`;
+            
+    switch ($overall) {
+        `ewire.validation:ValidationResult#OK`: info(#(
+            "Validierung erfolgreich."@de,
+            "Validation successful."@en));
+        `ewire.validation:ValidationResult#WARNING`: info(#(
+            "Validierung mit Warnungen abgeschlossen."@de,
+            "Validation delivered warnings."@en));
+        `ewire.validation:ValidationResult#ERROR`: info(#(
+            "Validierung fehlgeschlagen!"@de,
+            "Validation failed!"@en));
+    };
+    
+    $validations
+}]]></operation>
+				<postCreateActions>
+					<setModel target="model(self())">
+						<input/>
+					</setModel>
+				</postCreateActions>
+			</button>
+		</buttons>
+	</arguments>
+</config:template-call>

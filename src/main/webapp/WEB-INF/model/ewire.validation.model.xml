@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="ewire.validation">
+		<enum name="ValidationResult">
+			<classifier name="OK">
+				<annotations>
+					<instance-presentation icon="colored:tl-icon check tl-success"/>
+				</annotations>
+			</classifier>
+			<classifier name="WARNING">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-circle-question tl-warning"/>
+				</annotations>
+			</classifier>
+			<classifier name="ERROR">
+				<annotations>
+					<instance-presentation icon="css:bi bi-exclamation-octagon-fill tl-danger"/>
+				</annotations>
+			</classifier>
+		</enum>
+		<class name="FunctionValidation">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<attributes>
+				<reference name="function"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="ewire.functions:Function"
+				/>
+				<reference name="result"
+					kind="forwards"
+					navigate="true"
+					type="ValidationResult"
+				/>
+				<property name="description"
+					type="tl.model.i18n:I18NString"
+				/>
+				<reference name="socket"
+					kind="forwards"
+					navigate="true"
+					type="ewire.core:Socket"
+				/>
+			</attributes>
+		</class>
+	</module>
+</model>

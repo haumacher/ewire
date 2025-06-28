@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_c0731597_13f7_4c85_8026_6c7b197eaf97"
+		tileName="ID_eed82c47_a4c1_432f_b9fc_ae12005226fb"
+	>
+		<tileLabel key="dynamic.8d9522ae-241b-40fb-a329-e1a07907bfeb">
+			<en>Validation</en>
+			<de>Validierung</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-solid fa-heart-circle-check"
+		>
+			<description key="dynamic.91b49c46-d67b-4a67-8d39-d73c34945194">
+				<de>Test ob alle Funktionen zur Verfügung gestellt werden.</de>
+			</description>
+		</preview>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/validation/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
