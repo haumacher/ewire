@@ -22,7 +22,10 @@
 				<de>Neue Funktion</de>
 			</resourceKey>
 		</open-handler>
-		<typeOptions type="ewire.functions:Function"/>
+		<typeOptions
+			include-subtypes="false"
+			type="ewire.functions:Function"
+		/>
 		<initialization><![CDATA[function -> location -> $location.instanceOf(`ewire.core:Location`)
     ? $function.set(`ewire.functions:Function#location`, $location)
     : $function.set(`ewire.functions:Function#location`, null)]]></initialization>

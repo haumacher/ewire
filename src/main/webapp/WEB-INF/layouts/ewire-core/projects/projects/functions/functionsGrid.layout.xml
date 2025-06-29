@@ -27,6 +27,7 @@
 			/>
 			<button id="createRow"
 				class="com.top_logic.model.search.providers.GridCreateHandlerByExpression"
+				typeChooser="false"
 			>
 				<checkScopeProvider/>
 				<initOperation><![CDATA[c -> function -> $c.instanceOf(`ewire.core:Project`) 
