@@ -9,6 +9,7 @@
 		defaultSelection="false"
 		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
 		multiSelection="true"
+		showDetailOpener="true"
 		type="ewire.functions:Function"
 	>
 		<dialogs>
@@ -18,9 +19,13 @@
 			<de>Alle Funktionen</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
-			elements="model->$model.get(`ewire.core:Project#functions`)"
-			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
-		/>
+			modelForElement="element->model->$element.get(`ewire.functions:Function#project`) || $model"
+		>
+			<elements><![CDATA[model->$model.get(`ewire.core:Project#functions`)
+    .recursion(fun -> $fun.get(`ewire.functions:Function#parts`))]]></elements>
+			<supportsElement><![CDATA[element -> project -> $element.instanceOf(`ewire.functions:Function`)
+    && $element.get(`ewire.functions:Function#project`) == $project]]></supportsElement>
+		</modelBuilder>
 		<buttons>
 			<button id="exportExcelGrid"
 				class="com.top_logic.layout.table.export.StreamingExcelExportHandler"

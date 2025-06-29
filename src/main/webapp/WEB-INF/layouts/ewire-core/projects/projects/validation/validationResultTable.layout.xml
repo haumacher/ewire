@@ -33,7 +33,10 @@ model->$model]]></elements>
 					<de>Validierung starten</de>
 				</resourceKey>
 				<operation><![CDATA[project -> {
-    functions = $project.get(`ewire.core:Project#functions`);
+    // All atomic functions (that have no parts).
+    functions = $project.get(`ewire.core:Project#functions`)
+        .recursion(f -> $f.get(`ewire.functions:Function#parts`))
+        .filter(f -> $f.get(`ewire.functions:Function#parts`).isEmpty());
     
     validations = $functions.map(f -> {
         destinations = $f.get(`ewire.functions:Function#destination`);

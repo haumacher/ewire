@@ -42,6 +42,16 @@
 								<main-properties properties="label,description"/>
 							</annotations>
 						</field>
+						<field
+							attribute="parts"
+							fullQualifiedName="ewire.functions:Function#parts"
+							type="ewire.functions:SubFunction"
+						>
+							<annotations>
+								<label-position value="hide-label"/>
+								<main-properties properties="suffix,description"/>
+							</annotations>
+						</field>
 					</form>
 				</form-definition>
 			</annotations>
@@ -108,6 +118,82 @@
 				<property name="description"
 					type="tl.core:String"
 				/>
+				<reference name="parts"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="SubFunction"
+				/>
+				<property name="project"
+					type="ewire.core:Project"
+				>
+					<annotations>
+						<visibility value="hidden"/>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[fun -> $fun.recursion(x -> $x.container())
+    .filter(x -> $x.instanceOf(`ewire.core:Project`))
+    .firstElement()]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
+			</attributes>
+		</class>
+		<class name="SubFunction">
+			<generalizations>
+				<generalization type="Function"/>
+			</generalizations>
+			<attributes>
+				<property name="suffix"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+				<reference name="destination"
+					override="true"
+					type="ewire.core:Socket"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="x -> $x.container().get(`ewire.functions:Function#destination`)"/>
+						</storage-algorithm>
+					</annotations>
+				</reference>
+				<reference name="source"
+					override="true"
+					type="ewire.core:Socket"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="x -> $x.container().get(`ewire.functions:Function#source`)"/>
+						</storage-algorithm>
+					</annotations>
+				</reference>
+				<reference name="location"
+					override="true"
+					type="ewire.core:Location"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="x -> $x.container().get(`ewire.functions:Function#location`)"/>
+						</storage-algorithm>
+					</annotations>
+				</reference>
+				<property name="name"
+					override="true"
+					type="tl.core:String"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[x -> "{0} ({1})".fill(
+    $x.container().get(`ewire.functions:Function#name`),
+    $x.get(`ewire.functions:SubFunction#suffix`))]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
 			</attributes>
 		</class>
 	</module>
