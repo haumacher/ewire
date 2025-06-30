@@ -5,26 +5,74 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		defaultColumns="name,location,source,destination"
+		defaultColumns="result,function,description"
 		defaultSelection="false"
 		model="model(ewire-core/cablesIn_0_/dialog.layout.xml#Dialog)"
-		type="ewire.functions:Function"
+		type="ewire.validation:FunctionValidation"
 	>
 		<name key="dynamic.8df142c2-e0c7-424a-af63-b7a5979043cb">
 			<en>Available/required functions</en>
 			<de>Verfügbare/Benötigte Funktionen</de>
 		</name>
 		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
-			supportsElement="element->$element.instanceOf(`ewire.functions:Function`)"
+			supportsElement="element->$element.instanceOf(`ewire.validation:FunctionValidation`)"
 		>
-			<elements><![CDATA[socket->$socket.referers(`ewire.wires:Cable#connections`)
+			<elements><![CDATA[socket-> {
+    cables = $socket.referers(`ewire.wires:Cable#connections`);
+    
+    plannedFunctions = $cables.get(`ewire.wires:Cable#functions`)
+        .get(`ewire.wires:Function#function`)
+        .toSet();
+    
+    availableFunctions = $cables.get(`ewire.wires:Cable#functions`)
+        .filter(wire -> $wire.get(`ewire.wires:Function#connected`))
+        .get(`ewire.wires:Function#function`)
+        .toSet();
+    
+    $cables
     .map(cable -> $cable
         .get(`ewire.wires:Cable#functions`)
         .get(`ewire.wires:Function#function`))
     .flatten()
     .concat($socket.referers(`ewire.functions:Function#source`))
     .concat($socket.referers(`ewire.functions:Function#destination`))
-    .toSet()]]></elements>
+    .toSet()
+    .map(fun -> new(`ewire.validation:FunctionValidation`, transient: true)
+        ..set(`ewire.validation:FunctionValidation#function`, $fun)
+        ..set(`ewire.validation:FunctionValidation#socket`, $socket)
+    )
+    ..foreach(validation -> 
+        switch {
+            $availableFunctions.containsElement(
+                $validation.get(`ewire.validation:FunctionValidation#function`)):
+                
+                $validation
+                ..set(`ewire.validation:FunctionValidation#result`,
+                    `ewire.validation:ValidationResult#OK`);
+
+            $plannedFunctions.containsElement(
+                $validation.get(`ewire.validation:FunctionValidation#function`)):
+                
+                $validation
+                ..set(`ewire.validation:FunctionValidation#result`,
+                    `ewire.validation:ValidationResult#WARNING`)
+                ..set(`ewire.validation:FunctionValidation#description`, #(
+                    "Die Lieferung ist geplant, Kabel ist aber noch nicht verbunden."@de,
+                    "Delivery planned, but Cable not connected."@en
+                ));
+                
+            default: 
+                $validation
+                ..set(`ewire.validation:FunctionValidation#result`,
+                    `ewire.validation:ValidationResult#ERROR`)
+                ..set(`ewire.validation:FunctionValidation#description`, #(
+                    "Die Lieferung muss noch geplant werden."@de,
+                    "Delivery must still be planned."@en
+                ));
+            
+        }
+    )
+}]]></elements>
 		</modelBuilder>
 		<buttons>
 			<button id="exportExcel"
