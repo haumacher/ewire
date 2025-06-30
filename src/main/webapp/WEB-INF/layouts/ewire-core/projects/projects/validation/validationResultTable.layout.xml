@@ -5,7 +5,7 @@
 	template="com.top_logic/table.template.xml"
 >
 	<arguments
-		defaultColumns="result,function,socket,description"
+		defaultColumns="result,function,socket,description,ID_0085bd7a_decd_4475_891e_3a8724087237"
 		type="ewire.validation:FunctionValidation"
 	>
 		<name key="dynamic.70366ee1-34e6-4575-aa7a-1bf332cde6bf">
@@ -18,6 +18,23 @@
 			<elements><![CDATA[// List of validation results is delivered by button click.
 model->$model]]></elements>
 		</modelBuilder>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_0085bd7a_decd_4475_891e_3a8724087237"
+				columnType="ewire.core:Location"
+			>
+				<columnLabel key="dynamic.5ef0bff3-9249-4060-a9d8-94c62ab9a4e9">
+					<en>Room</en>
+					<de>Raum</de>
+				</columnLabel>
+				<accessor><![CDATA[validation -> $validation
+    .get(`ewire.validation:FunctionValidation#socket`)
+    .recursion(x -> $x.instanceOf(`ewire.core:InRoom`)
+        ? $x.container()
+        : null)
+    .lastElement()]]></accessor>
+			</configurationProvider>
+		</configurationProviders>
 		<buttons>
 			<button id="exportExcel"
 				class="com.top_logic.layout.table.export.ExcelExportHandler"
