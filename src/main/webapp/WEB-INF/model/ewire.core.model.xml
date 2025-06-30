@@ -95,8 +95,8 @@
         : null,
         minDepth: 1
     )
-    .map(l -> $l.get(`ewire.core:Location#shortcut`))
-    .filter(x -> $x != null);
+    .map(l -> $l.get(`ewire.core:Location#shortcut`)
+        || $l.get(`ewire.core:Location#name`));
     
     $parentShortcuts.isEmpty() ? "" : " < " + $parentShortcuts.join(" < ")
 }
