@@ -10,7 +10,7 @@
 	
 	<groupId>de.haumacher.ewire</groupId>
 	<artifactId>ewire-core</artifactId>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	
 	<licenses>
         <license>
