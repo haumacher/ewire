@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileGroup.template.xml"
+>
+	<arguments>
+		<name key="dynamic.5174f474-e6ef-4adb-acbf-c41129d0eb20">
+			<en>Cable functions</en>
+			<de>Kabelfunktionen</de>
+		</name>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/cables2/nachOrt/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/cables2/kabelliste/tileLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_68118768_55ec_421b_a87a_cb12afa28e9e"
+		tileName="ID_f4f40e45_45ee_4703_a248_67476d2f5056"
+	>
+		<tileLabel key="dynamic.e347e49d-422f-43b9-a65c-b8187b04e193">
+			<en>Cables</en>
+			<de>Kabel</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:bi bi-plug"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/cables2/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

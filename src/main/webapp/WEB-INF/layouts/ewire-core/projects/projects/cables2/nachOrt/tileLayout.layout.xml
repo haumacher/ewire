@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_100d67df_a467_4a3e_a931_991f93005a09"
+		tileName="ID_a163e315_ac39_431b_88ed_baa77f4c0895"
+	>
+		<tileLabel key="dynamic.cc58743c-6c5e-42a7-9bda-295ea1f5606e">
+			<de>Nach Ort</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-solid fa-location-dot"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/cables1/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="_actions,id,cableType,ID_0c7a9e97_1315_4ec9_873a_fe78414c3e93,connections,description"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		type="ewire.wires:Cable"
+	>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/cables2/kabelliste/createObject/dialog.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/cables2/kabelliste/properties/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.cebf583d-eb19-492f-8d53-1bd8ed548896">
+			<de>Kabelliste</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`ewire.core:Project#cables`)"
+			supportsElement="element -> model ->$element.instanceOf(`ewire.wires:Cable`) &amp;&amp; $element.container() == $model"
+		/>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
+				columnId="_actions"
+				columnLabel="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.buttonColumn"
+				width="40px"
+			>
+				<buttons>
+					<button id="openEditDialog"
+						class="com.top_logic.tool.boundsec.OpenModalDialogCommandHandler"
+						dialog-name="ewire-core/projects/projects/cables2/kabelliste/properties/dialog.layout.xml#Dialog"
+						group="Write"
+						image="theme:ICONS_BUTTON_EDIT"
+						resourceKey="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.edit"
+						targetComponent="ewire-core/projects/projects/cables2/kabelliste/properties/properties_Form_Form.layout.xml#Form"
+					>
+						<executability>
+							<rule class="com.top_logic.tool.execution.InViewModeExecutable"/>
+						</executability>
+						<postCreateActions>
+							<setEditMode>
+								<target name="ewire-core/projects/projects/cables2/kabelliste/properties/properties_Form_Form.layout.xml#Form"/>
+							</setEditMode>
+						</postCreateActions>
+					</button>
+				</buttons>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.model.search.providers.ComputedColumnProviderByExpression"
+				columnId="ID_0c7a9e97_1315_4ec9_873a_fe78414c3e93"
+				columnType="ewire.wires:Function"
+			>
+				<columnLabel key="dynamic.3c74f814-80d8-4b11-93fd-3c1207550ffa">
+					<de>Funktionen</de>
+				</columnLabel>
+				<accessor><![CDATA[cable -> $cable.get(`ewire.wires:Cable#functions`)
+    .filter(wire -> $wire.get(`ewire.wires:Function#function`) != null)]]></accessor>
+			</configurationProvider>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>
