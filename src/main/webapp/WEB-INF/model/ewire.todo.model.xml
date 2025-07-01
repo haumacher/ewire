@@ -19,6 +19,28 @@
 				</annotations>
 			</classifier>
 		</enum>
+		<class name="Comment">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<attributes>
+				<property name="content"
+					mandatory="true"
+					type="tl.model.wysiwyg:Html"
+				/>
+				<reference name="author"
+					kind="forwards"
+					navigate="true"
+					type="tl.accounts:Person"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="c -> $c.createRevision().get(`tl.core:Revision#author`)"/>
+						</storage-algorithm>
+					</annotations>
+				</reference>
+			</attributes>
+		</class>
 		<class name="Task">
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
@@ -104,6 +126,14 @@
 						</default-value>
 					</annotations>
 				</reference>
+				<reference name="comments"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					ordered="true"
+					type="Comment"
+				/>
 			</attributes>
 		</class>
 	</module>
