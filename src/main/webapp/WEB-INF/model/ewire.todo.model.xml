@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
+	<module name="ewire.todo">
+		<enum name="Kind">
+			<classifier name="NOTE">
+				<annotations>
+					<instance-presentation icon="css:fa-regular fa-comment"/>
+				</annotations>
+			</classifier>
+			<classifier name="TODO">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-person-digging"/>
+				</annotations>
+			</classifier>
+			<classifier name="PROBLEM">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-triangle-exclamation"/>
+				</annotations>
+			</classifier>
+		</enum>
+		<class name="Task">
+			<generalizations>
+				<generalization type="tl.model:TLObject"/>
+			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.todo:Task#name"
+							type="tl.core:String"
+						>
+							<annotations>
+								<render-whole-line/>
+							</annotations>
+						</field>
+						<field
+							attribute="type"
+							fullQualifiedName="ewire.todo:Task#type"
+							type="ewire.todo:Kind"
+						/>
+						<field
+							attribute="responsible"
+							fullQualifiedName="ewire.todo:Task#responsible"
+							type="tl.accounts:Person"
+						/>
+						<field
+							attribute="description"
+							fullQualifiedName="ewire.todo:Task#description"
+							type="tl.model.wysiwyg:Html"
+						/>
+					</form>
+				</form-definition>
+			</annotations>
+			<attributes>
+				<property name="name"
+					mandatory="true"
+					type="tl.core:String"
+				/>
+				<property name="description"
+					type="tl.model.wysiwyg:Html"
+				/>
+				<reference name="responsible"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="tl.accounts:Person"
+				>
+					<annotations>
+						<default-value>
+							<default-by-expression value="[currentUser()]"/>
+						</default-value>
+					</annotations>
+				</reference>
+				<property name="resolved"
+					type="tl.core:Boolean"
+				/>
+				<property name="id"
+					mandatory="true"
+					type="tl.core:String"
+				>
+					<annotations>
+						<default-value>
+							<provider class="com.top_logic.element.structured.util.NumberHandlerDefaultProvider"
+								sequence-name="Task"
+							>
+								<dynamic-sequence-name class="com.top_logic.element.structured.util.ContextAwareSequenceName"/>
+							</provider>
+						</default-value>
+						<visibility value="read-only"/>
+						<create-visibility value="hidden"/>
+					</annotations>
+				</property>
+				<reference name="type"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="Kind"
+				>
+					<annotations>
+						<default-value>
+							<classifier value="TODO"/>
+						</default-value>
+					</annotations>
+				</reference>
+			</attributes>
+		</class>
+	</module>
+</model>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tileGroup.template.xml"
+>
+	<arguments>
+		<name key="dynamic.617f5a40-34df-4680-9548-87bf047fe494">
+			<en>TODO view</en>
+			<de>Sicht TODOs</de>
+		</name>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/myJobs/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/allJobs/tileLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

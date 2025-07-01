@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_6e0b9d49_bd2c_4b7c_89ae_90fe7526c44a"
+		tileName="ID_3ed8aa11_2e36_4d3b_954f_6e94aebfa4d5"
+	>
+		<tileLabel key="dynamic.9f33e581-a12c-46b8-87c5-bd5f9e6a7aa0">
+			<de>TODOs</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-regular fa-calendar-check"
+		>
+			<description key="dynamic.739f9136-aa0e-442f-b539-878ab9cac3de">
+				<de>Aufgaben, Fragen, noch zu lösende Probleme.</de>
+			</description>
+		</preview>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

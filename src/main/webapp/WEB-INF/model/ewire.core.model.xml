@@ -345,6 +345,13 @@
 					navigate="true"
 					type="ewire.functions:Function"
 				/>
+				<reference name="tasks"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.todo:Task"
+				/>
 			</attributes>
 		</class>
 	</module>

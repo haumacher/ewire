@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="_actions,id,type,name,description,responsible,resolved"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		type="ewire.todo:Task"
+	>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/allJobs/createObject/dialog.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/allJobs/properties/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.8c9a1420-cb14-4e6b-89f5-b9b6c832c309">
+			<en>All tasks</en>
+			<de>Alle Aufgaben</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression"
+			elements="model->$model.get(`ewire.core:Project#tasks`)"
+		>
+			<supportsElement><![CDATA[element -> model -> $element.instanceOf(`ewire.todo:Task`)
+    && $element.referers(`ewire.core:Project#tasks`) == $model]]></supportsElement>
+		</modelBuilder>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
+				columnId="_actions"
+				columnLabel="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.buttonColumn"
+				width="40px"
+			>
+				<buttons>
+					<button id="openEditDialog"
+						class="com.top_logic.tool.boundsec.OpenModalDialogCommandHandler"
+						dialog-name="ewire-core/projects/projects/tODOs/allJobs/properties/dialog.layout.xml#Dialog"
+						group="Write"
+						image="theme:ICONS_BUTTON_EDIT"
+						resourceKey="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.edit"
+						targetComponent="ewire-core/projects/projects/tODOs/allJobs/properties/properties_Form_Form.layout.xml#Form"
+					>
+						<executability>
+							<rule class="com.top_logic.tool.execution.InViewModeExecutable"/>
+						</executability>
+						<postCreateActions>
+							<setEditMode>
+								<target name="ewire-core/projects/projects/tODOs/allJobs/properties/properties_Form_Form.layout.xml#Form"/>
+							</setEditMode>
+						</postCreateActions>
+					</button>
+				</buttons>
+			</configurationProvider>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+		</buttons>
+	</arguments>
+</config:template-call>

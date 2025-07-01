@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/table.template.xml"
+>
+	<arguments
+		defaultColumns="_actions,id,type,name,responsible,description"
+		defaultSelection="false"
+		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
+		type="ewire.todo:Task"
+	>
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/myJobs/createObject/dialog.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/myJobs/properties/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.ce672bb2-dda3-4864-9b4c-22d85cd916fe">
+			<en>My Jobs</en>
+			<de>Meine Aufgaben</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.ListModelByExpression">
+			<elements><![CDATA[model->$model.get(`ewire.core:Project#tasks`)
+    .filter(t -> !$t.get(`ewire.todo:Task#resolved`))
+    .filter(t -> $t.get(`ewire.todo:Task#responsible`)
+        .containsElement(
+            currentUser()))]]></elements>
+			<supportsElement><![CDATA[element-> model -> $element.instanceOf(`ewire.todo:Task`)
+    && $element.referers(`ewire.core:Project#tasks`) == $model]]></supportsElement>
+		</modelBuilder>
+		<configurationProviders>
+			<configurationProvider class="com.top_logic.layout.table.provider.ButtonColumnProvider"
+				columnId="_actions"
+				columnLabel="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.buttonColumn"
+				width="40px"
+			>
+				<buttons>
+					<button id="openEditDialog"
+						class="com.top_logic.tool.boundsec.OpenModalDialogCommandHandler"
+						dialog-name="ewire-core/projects/projects/tODOs/myJobs/properties/dialog.layout.xml#Dialog"
+						group="Write"
+						image="theme:ICONS_BUTTON_EDIT"
+						resourceKey="class.com.top_logic.layout.editor.I18NConstants.DYNAMIC_COMPONENT.com.top_logic.model.search.tableWithDialogs.template.defaults.edit"
+						targetComponent="ewire-core/projects/projects/tODOs/myJobs/properties/properties_Form_Form.layout.xml#Form"
+					>
+						<executability>
+							<rule class="com.top_logic.tool.execution.InViewModeExecutable"/>
+						</executability>
+						<postCreateActions>
+							<setEditMode>
+								<target name="ewire-core/projects/projects/tODOs/myJobs/properties/properties_Form_Form.layout.xml#Form"/>
+							</setEditMode>
+						</postCreateActions>
+					</button>
+				</buttons>
+			</configurationProvider>
+			<configurationProvider class="com.top_logic.layout.table.model.AllVisibleColumnsProvider"
+				columns="resolved"
+			/>
+		</configurationProviders>
+		<buttons>
+			<button id="exportExcel"
+				class="com.top_logic.layout.table.export.ExcelExportHandler"
+			/>
+			<button id="deleteRow"
+				class="com.top_logic.layout.component.GenericDeleteCommandHandler"
+				target="selection(self())"
+			/>
+			<button id="ID_7a410023_53f4_4b64_9c09_5b9e3c0ffe8e"
+				class="com.top_logic.model.search.providers.CommandHandlerByExpression"
+				confirm="true"
+				image="css:bi bi-calendar2-check"
+				operation="task -> $task.set(`ewire.todo:Task#resolved`, true)"
+				target="selection(self())"
+			>
+				<resourceKey key="dynamic.1c9c2421-9666-43a4-9e1f-407c78405c02">
+					<en>Mark selected task as completed</en>
+					<de>Markierte Aufgabe abschließen</de>
+				</resourceKey>
+				<executability>
+					<rule-by-expression decision="x -> $x != null"/>
+				</executability>
+				<confirmMessage key="dynamic.8bb3bf8b-201b-4250-a727-1965c2b925a8">
+					<de>Wenn Sie die Aufgabe "{0}" abschließen, verschwindet sie aus dieser Liste, sind Sie sicher?</de>
+				</confirmMessage>
+			</button>
+		</buttons>
+	</arguments>
+</config:template-call>

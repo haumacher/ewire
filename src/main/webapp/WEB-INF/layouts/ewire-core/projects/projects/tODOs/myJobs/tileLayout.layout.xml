@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_f2ce3775_55ce_4c66_972b_bfd4cde2cc5a"
+		tileName="ID_71dfac54_a32d_403b_a7f8_4a96c76cf23e"
+	>
+		<tileLabel key="dynamic.eebbc493-7f6b-4194-803d-8f29cda0d5c9">
+			<en>My Jobs</en>
+			<de>Meine Aufgaben</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-regular fa-clock"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/projects/projects/tODOs/myJobs/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>
