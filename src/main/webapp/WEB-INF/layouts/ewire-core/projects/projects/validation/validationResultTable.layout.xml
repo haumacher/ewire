@@ -55,6 +55,10 @@ model->$model]]></elements>
         .recursion(f -> $f.get(`ewire.functions:Function#parts`))
         .filter(f -> $f.get(`ewire.functions:Function#parts`).isEmpty());
     
+    allSockets = $project
+        .recursion(l -> $l.get(`ewire.core:WithLocations#locations`))
+        .filter(l -> $l.instanceOf(`ewire.core:Socket`));
+            
     validations = $functions.map(f -> {
         destinations = $f.get(`ewire.functions:Function#destination`);
 
@@ -123,8 +127,7 @@ model->$model]]></elements>
     )
     .concat(
         // Sockets without function.
-        $project.recursion(l -> $l.get(`ewire.core:WithLocations#locations`))
-            .filter(l -> $l.instanceOf(`ewire.core:Socket`))
+        $allSockets
             .filter(s -> 
                 !$s.get(`ewire.core:Socket#distributor`)
                 && $s.referers(`ewire.functions:Function#destination`).isEmpty()
@@ -137,6 +140,35 @@ model->$model]]></elements>
                 ..set(`ewire.validation:FunctionValidation#description`, #(
                     "Die Dose hat keine Funktion."@de,
                     "The socket has no function."@en)))
+    )
+    .concat(
+        // All inconsistent connections
+        $allSockets.get(`ewire.core:Socket#connections`)
+            .filter(con -> {
+                byFunction = $con
+                    .get(`ewire.connections:Connection#wires`)
+                    .groupBy(w -> $w.get(`ewire.wires:Function#function`));
+            
+                $byFunction.size() != 1 || $byFunction[null] != null
+            })
+            .map(con -> 
+                new(`ewire.validation:FunctionValidation`, transient: true)
+                ..set(`ewire.validation:FunctionValidation#socket`, $con.container())
+                ..set(`ewire.validation:FunctionValidation#result`, 
+                    `ewire.validation:ValidationResult#ERROR`)
+                ..set(`ewire.validation:FunctionValidation#description`, #(
+                    "Die Verbindung ist inkonsistent: {0}"@de,
+                    "The connection is inconsistent: {0}"@en)
+                    .fill(
+                        $con.get(`ewire.connections:Connection#wires`)
+                            .map(w -> "{0}-{1}:{2}".fill(
+                                $w.container().get(`ewire.wires:Cable#id`),
+                                $w.get(`ewire.wires:Function#wire`).label(),
+                                $w.get(`ewire.wires:Function#function`).label(),
+                            ))
+                            .join(", ")
+                    ))
+            )
     );
     
     overall = $validations
