@@ -73,6 +73,11 @@
 							type="tl.core:String"
 						/>
 						<field
+							attribute="type"
+							fullQualifiedName="ewire.functions:Function#type"
+							type="ewire.functions:FunctionType"
+						/>
+						<field
 							attribute="description"
 							fullQualifiedName="ewire.functions:Function#description"
 							type="tl.core:String"
