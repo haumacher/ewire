@@ -2,6 +2,63 @@
 
 <model xmlns="http://www.top-logic.com/ns/dynamic-types/6.0">
 	<module name="ewire.functions">
+		<enum name="FunctionType">
+			<classifier name="POWER">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-plug"/>
+				</annotations>
+			</classifier>
+			<classifier name="SWITCH">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-lightbulb"/>
+				</annotations>
+			</classifier>
+			<classifier name="BLIND">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-arrows-up-down"/>
+				</annotations>
+			</classifier>
+			<classifier name="BLIND_UP">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-chevron-up"/>
+				</annotations>
+			</classifier>
+			<classifier name="BLIND_DOWN">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-angle-down"/>
+				</annotations>
+			</classifier>
+			<classifier name="KNX_PLUS">
+				<annotations>
+					<instance-presentation icon="css:bi bi-plus-circle"/>
+				</annotations>
+			</classifier>
+			<classifier name="KNX_MINUS">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-circle-minus"/>
+				</annotations>
+			</classifier>
+			<classifier name="NETWORK">
+				<annotations>
+					<instance-presentation icon="css:bi bi-usb-plug"/>
+				</annotations>
+			</classifier>
+			<classifier name="SAT">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-satellite-dish"/>
+				</annotations>
+			</classifier>
+			<classifier name="SENSOR">
+				<annotations>
+					<instance-presentation icon="css:fa-solid fa-house-signal"/>
+				</annotations>
+			</classifier>
+			<classifier name="OTHER">
+				<annotations>
+					<instance-presentation icon="css:fa-regular fa-circle-question"/>
+				</annotations>
+			</classifier>
+		</enum>
 		<class name="Function">
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
@@ -139,6 +196,12 @@
 						</storage-algorithm>
 					</annotations>
 				</property>
+				<reference name="type"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="FunctionType"
+				/>
 			</attributes>
 		</class>
 		<class name="SubFunction">

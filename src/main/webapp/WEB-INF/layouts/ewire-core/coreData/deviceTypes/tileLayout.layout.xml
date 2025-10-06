@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tile.template.xml"
+>
+	<arguments
+		helpID="ID_a41868d5_9198_4887_a61f_897745c43c13"
+		tileName="ID_daa1ca2c_a87a_4230_839a_e0ba4769337d"
+	>
+		<tileLabel key="dynamic.764874b3-8b98-42a5-ace5-fb8af8da2304">
+			<en>Device types</en>
+			<de>Gerätetypen</de>
+		</tileLabel>
+		<preview class="com.top_logic.mig.html.layout.tiles.component.StaticPreview"
+			icon="css:fa-solid fa-microscope"
+		/>
+		<components>
+			<layout-reference resource="ewire-core/coreData/deviceTypes/innerLayout.layout.xml"/>
+		</components>
+	</arguments>
+</config:template-call>

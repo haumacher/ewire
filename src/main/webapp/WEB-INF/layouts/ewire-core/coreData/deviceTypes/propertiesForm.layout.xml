@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments model="selection(ewire-core/coreData/deviceTypes/deviceTypesGrid.layout.xml#Grid)">
+		<name key="dynamic.9322ba7e-04b4-4497-a23f-bd3709eced3d">
+			<en>Properties</en>
+			<de>Eigenschaften</de>
+		</name>
+	</arguments>
+</config:template-call>

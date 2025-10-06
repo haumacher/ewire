@@ -11,6 +11,7 @@
 		</name>
 		<components>
 			<layout-reference resource="ewire-core/coreData/cableTypes/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/coreData/deviceTypes/tileLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>

@@ -5,7 +5,7 @@
 	template="com.top_logic.element/grid.template.xml"
 >
 	<arguments
-		defaultColumns="name,location,source,destination"
+		defaultColumns="name,type,location,source,destination"
 		defaultSelection="false"
 		model="selection(ewire-core/projects/projectsContextList.layout.xml#List)"
 		multiSelection="true"
