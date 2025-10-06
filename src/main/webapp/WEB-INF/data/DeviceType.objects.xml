@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<objects>
+	<object id="1"
+		type="ewire.devices:DeviceType"
+	>
+		<attribute name="name"
+			value="Rolladenaktor 8 fach"
+		/>
+		<attribute name="connectors">
+			<object id="2"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="H-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="3"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="H-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="4"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="E-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="5"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="D-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="6"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="E-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="7"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="D-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="8"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="F-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="9"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="F-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="10"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="A-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="11"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="G-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="12"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="A-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="13"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="G-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="14"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="B-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="15"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="C-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+			<object id="16"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="C-UP"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_UP"/>
+				</attribute>
+			</object>
+			<object id="17"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="B-DOWN"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#BLIND_DOWN"/>
+				</attribute>
+			</object>
+		</attribute>
+	</object>
+	<object id="18"
+		type="ewire.devices:DeviceType"
+	>
+		<attribute name="name"
+			value="Heizaktor 6 fach"
+		/>
+		<attribute name="connectors">
+			<object id="19"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="D"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="20"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="C"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="21"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="E"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="22"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="F"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="23"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="B"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="24"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="A"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+		</attribute>
+	</object>
+	<object id="25"
+		type="ewire.devices:DeviceType"
+	>
+		<attribute name="name"
+			value="Sicherung 16A"
+		/>
+		<attribute name="connectors">
+			<object id="26"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="L"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#POWER"/>
+				</attribute>
+			</object>
+		</attribute>
+	</object>
+	<object id="27"
+		type="ewire.devices:DeviceType"
+	>
+		<attribute name="name"
+			value="Schaltaktor 12 fach"
+		/>
+		<attribute name="connectors">
+			<object id="28"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="A"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="29"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="E"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="30"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="B"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="31"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="C"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="32"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="D"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="33"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="F"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="34"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="J"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="35"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="K"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="36"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="H"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="37"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="L"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="38"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="G"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="39"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="I"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+		</attribute>
+	</object>
+	<object id="40"
+		type="ewire.devices:DeviceType"
+	>
+		<attribute name="name"
+			value="Schaltaktor 20 fach"
+		/>
+		<attribute name="connectors">
+			<object id="41"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="I"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="42"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="G"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="43"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="F"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="44"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="K"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="45"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="E"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="46"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="J"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="47"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="H"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="48"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="L"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="49"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="M"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="50"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="C"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="51"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="D"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="52"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="B"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="53"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="R"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="54"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="P"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="55"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="A"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="56"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="T"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="57"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="Q"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="58"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="S"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="59"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="O"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+			<object id="60"
+				type="ewire.devices:ConnectorTemplate"
+			>
+				<attribute name="name"
+					value="N"
+				/>
+				<attribute name="connectionType">
+					<model-ref name="ewire.functions:FunctionType#SWITCH"/>
+				</attribute>
+			</object>
+		</attribute>
+	</object>
+</objects>
