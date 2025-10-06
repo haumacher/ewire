@@ -174,6 +174,7 @@
 			</generalizations>
 			<annotations>
 				<id-column value="label"/>
+				<main-properties properties="cable,wire,function"/>
 			</annotations>
 			<attributes>
 				<reference name="wire"
@@ -226,7 +227,9 @@
 					<annotations>
 						<storage-algorithm>
 							<query>
-								<expr><![CDATA[fun -> "{0}: {1}".fill(
+								<expr><![CDATA[fun -> "{0} {1}: {2}".fill(
+    $fun.container()
+        .get(`ewire.wires:Cable#id`),
     $fun.get(`ewire.wires:Function#wire`).label(),
     $fun.get(`ewire.wires:Function#function`).label()
 )]]></expr>
@@ -262,6 +265,15 @@
         // Their source/defining socket
         .get(`ewire.functions:Function#source`))]]></expr>
 							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
+				<property name="cable"
+					type="Cable"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query expr="x -> $x.container()"/>
 						</storage-algorithm>
 					</annotations>
 				</property>

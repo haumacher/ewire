@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic/tree.template.xml"
+>
+	<arguments model="selection(ewire-core/projects/projectsContextList.layout.xml#List)">
+		<dialogs>
+			<layout-reference resource="ewire-core/projects/projects/devices/createDevice/dialog.layout.xml"/>
+		</dialogs>
+		<name key="dynamic.f0096799-faa1-4e44-963d-3292b70c8eaf">
+			<en>Devices</en>
+			<de>Geräte</de>
+		</name>
+		<modelBuilder class="com.top_logic.model.search.providers.TreeModelByExpression"
+			rootNode="model -> $model"
+		>
+			<children><![CDATA[node->switch {
+    $node.instanceOf(`ewire.core:Socket`):
+        $node.referers(`ewire.devices:Device#location`);
+    default: $node.get(`ewire.core:WithLocations#locations`);
+}]]></children>
+			<nodePredicate><![CDATA[node->$node.instanceOf(`ewire.core:WithLocations`)
+    || $node.instanceOf(`ewire.core:Socket`)
+    || $node.instanceOf(`ewire.devices:Device`)]]></nodePredicate>
+			<parents><![CDATA[node->switch {
+    $node.instanceOf(`ewire.devices:Device`):
+        $node.get(`ewire.devices:Device#location`);
+    default:
+        $node.referers(`ewire.core:WithLocations#locations`);
+}]]></parents>
+		</modelBuilder>
+	</arguments>
+</config:template-call>

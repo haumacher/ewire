@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.element/form.template.xml"
+>
+	<arguments
+		model="selection(ewire-core/projects/projects/devices/devicesTree.layout.xml#Tree)"
+		type="ewire.devices:Device"
+	>
+		<name key="dynamic.f4aa089b-f552-4924-9c96-0b02a04da2f4">
+			<en>Properties</en>
+			<de>Eigenschaften</de>
+		</name>
+	</arguments>
+</config:template-call>

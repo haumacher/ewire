@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config:template-call
+	xmlns:config="http://www.top-logic.com/ns/config/6.0"
+	template="com.top_logic.model.search/transaction.template.xml"
+>
+	<arguments
+		formType="ewire.devices:Device"
+		height="300px"
+		width="600px"
+	>
+		<title>
+			<title key="dynamic.0f38be87-15e0-4124-8876-0d6309dc6931">
+				<en>Create device</en>
+				<de>Gerät anlegen</de>
+			</title>
+		</title>
+		<open-handler id="ID_0fa580b0_a48f_4c01_8d68_5e2e67d00199"
+			config:interface="com.top_logic.layout.editor.config.DialogOpenHandlerConfig"
+			group="Write"
+			image="css:fa-solid fa-plus"
+			target="selection(self())"
+			targetComponent="ewire-core/projects/projects/devices/createDevice/dialog.layout.xml#Form"
+		>
+			<resourceKey key="dynamic.0f38be87-15e0-4124-8876-0d6309dc6931">
+				<en>Create device</en>
+				<de>Gerät anlegen</de>
+			</resourceKey>
+			<executability>
+				<rule-by-expression show-disabled="true">
+					<decision><![CDATA[model -> $model.instanceOf(`ewire.core:Socket`)
+? true
+: #("Ein Gerät kann nur in einer Dose/Verteiler angelegt werden."@de,
+    "A device can only be created in a socket."@en)]]></decision>
+				</rule-by-expression>
+			</executability>
+		</open-handler>
+		<forms>
+			<form type="ewire.devices:Device">
+				<formDefinition>
+					<field
+						attribute="deviceType"
+						fullQualifiedName="ewire.devices:Device#deviceType"
+						type="ewire.devices:DeviceType"
+					/>
+					<field
+						attribute="name"
+						fullQualifiedName="ewire.devices:Device#name"
+						type="tl.core:String"
+					/>
+				</formDefinition>
+			</form>
+		</forms>
+		<transactionHandler id="perform"
+			class="com.top_logic.model.search.providers.TransactionHandlerByExpression"
+			clique="apply"
+			closeDialog="true"
+			confirm="false"
+			confirmMessage=""
+			group="Write"
+			image="theme:ICONS_BUTTON_OK"
+		>
+			<resourceKey key="dynamic.0f38be87-15e0-4124-8876-0d6309dc6931">
+				<en>Create device</en>
+				<de>Gerät anlegen</de>
+			</resourceKey>
+			<operation><![CDATA[form -> socket -> $form.copy(transient: false)
+    ..set(`ewire.devices:Device#location`, $socket)
+    ..set(`ewire.devices:Device#connectors`, 
+        $form.get(`ewire.devices:Device#deviceType`)
+        .get(`ewire.devices:DeviceType#connectors`)
+        .map(template -> new(`ewire.devices:Connector`)
+            ..set(`ewire.devices:Connector#connectorType`, $template)))]]></operation>
+			<postCreateActions/>
+		</transactionHandler>
+	</arguments>
+</config:template-call>

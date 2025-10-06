@@ -352,6 +352,13 @@
 					navigate="true"
 					type="ewire.todo:Task"
 				/>
+				<reference name="devices"
+					composite="true"
+					kind="forwards"
+					multiple="true"
+					navigate="true"
+					type="ewire.devices:Device"
+				/>
 			</attributes>
 		</class>
 	</module>

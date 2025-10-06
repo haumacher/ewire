@@ -12,6 +12,7 @@
 			<layout-reference resource="ewire-core/projects/projects/cables2/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/validation/tileLayout.layout.xml"/>
 			<layout-reference resource="ewire-core/projects/projects/tODOs/tileLayout.layout.xml"/>
+			<layout-reference resource="ewire-core/projects/projects/devices/tileLayout.layout.xml"/>
 		</components>
 	</arguments>
 </config:template-call>

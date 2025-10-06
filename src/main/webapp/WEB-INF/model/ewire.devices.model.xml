@@ -6,9 +6,11 @@
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
 			</generalizations>
+			<annotations>
+				<main-properties properties="connectorType,connections,name"/>
+			</annotations>
 			<attributes>
 				<property name="name"
-					mandatory="true"
 					type="tl.core:String"
 				/>
 				<reference name="connections"
@@ -16,13 +18,29 @@
 					multiple="true"
 					navigate="true"
 					type="ewire.wires:Function"
-				/>
+				>
+					<annotations>
+						<options>
+							<options-by-expression>
+								<function><![CDATA[con -> $con.container()
+    .get(`ewire.devices:Device#location`)
+    .referers(`ewire.wires:Cable#connections`)
+    .get(`ewire.wires:Cable#functions`)
+    .filter(wire -> $wire.get(`ewire.wires:Function#function`).get(`ewire.functions:Function#type`) == $con.get(`ewire.devices:Connector#connectorType`).get(`ewire.devices:ConnectorTemplate#connectionType`))]]></function>
+							</options-by-expression>
+						</options>
+					</annotations>
+				</reference>
 				<reference name="connectorType"
 					kind="forwards"
 					mandatory="true"
 					navigate="true"
 					type="ConnectorTemplate"
-				/>
+				>
+					<annotations>
+						<visibility value="read-only"/>
+					</annotations>
+				</reference>
 			</attributes>
 		</class>
 		<class name="ConnectorTemplate">
@@ -41,18 +59,45 @@
 				/>
 			</attributes>
 		</class>
-		<interface name="Device">
+		<class name="Device">
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
 			</generalizations>
+			<annotations>
+				<form-definition>
+					<form>
+						<field
+							attribute="deviceType"
+							fullQualifiedName="ewire.devices:Device#deviceType"
+							type="ewire.devices:DeviceType"
+						/>
+						<field
+							attribute="name"
+							fullQualifiedName="ewire.devices:Device#name"
+							type="tl.core:String"
+						/>
+						<field
+							attribute="location"
+							fullQualifiedName="ewire.devices:Device#location"
+							type="ewire.core:Location"
+						/>
+						<field
+							attribute="connectors"
+							fullQualifiedName="ewire.devices:Device#connectors"
+							type="ewire.devices:Connector"
+						/>
+					</form>
+				</form-definition>
+				<id-column value="label"/>
+			</annotations>
 			<attributes>
 				<property name="name"
-					mandatory="true"
 					type="tl.core:String"
 				/>
 				<reference name="connectors"
 					composite="true"
 					kind="forwards"
+					multiple="true"
 					navigate="true"
 					type="Connector"
 				/>
@@ -61,9 +106,40 @@
 					mandatory="true"
 					navigate="true"
 					type="DeviceType"
-				/>
+				>
+					<annotations>
+						<visibility value="read-only"/>
+					</annotations>
+				</reference>
+				<reference name="location"
+					kind="forwards"
+					mandatory="true"
+					navigate="true"
+					type="ewire.core:Location"
+				>
+					<annotations>
+						<visibility value="read-only"/>
+					</annotations>
+				</reference>
+				<property name="label"
+					type="tl.core:String"
+				>
+					<annotations>
+						<storage-algorithm>
+							<query>
+								<expr><![CDATA[x -> {
+name = $x.get(`ewire.devices:Device#name`);
+type = $x.get(`ewire.devices:Device#deviceType`).label();
+$name == null
+    ? $type
+    : "{0} ({1})".fill($name, $type)
+}]]></expr>
+							</query>
+						</storage-algorithm>
+					</annotations>
+				</property>
 			</attributes>
-		</interface>
+		</class>
 		<class name="DeviceType">
 			<generalizations>
 				<generalization type="tl.model:TLObject"/>
